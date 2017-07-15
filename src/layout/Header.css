@@ -12,3 +12,12 @@
     height: 30px;
     animation: App-logo-spin infinite 20s linear;
 }
+
+.App-header-small-enter {
+    height: 150px !important;
+    transition: height 500ms;
+}
+
+.App-header-small-enter.App-header-small-enter-active {
+    height: 50px !important;
+}

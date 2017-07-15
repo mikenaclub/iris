@@ -25,7 +25,8 @@
 }
 
 .App-detail {
-    flex: 1;
+    min-height: calc(100% - 150px);
+    height: 100%;
 }
 
 .App-home {
@@ -47,7 +48,7 @@
 
 .fade-enter.fade-enter-active {
     opacity: 1;
-    transition: opacity 500ms ease-in;
+    transition: opacity 1000ms ease-in;
 }
 
 .fade-exit {
@@ -55,22 +56,5 @@
 }
 
 .fade-exit.fade-exit-active {
-    display: none;
-}
-
-.test-enter {
-    height: 0px !important;
-    transition: height 1000ms;
-}
-
-.test-enter.test-enter-active {
-    height: 150px !important;
-}
-
-.test-exit {
-    display: none;
-}
-
-.test-exit.test-exit-active {
     display: none;
 }

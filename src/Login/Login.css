@@ -1,32 +1,8 @@
-@media only screen and (max-width: 768px) {
-    .App-detail-login {
-        width: 90vw;
-    }
-}
-
 .Action-bar {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 5vh;
-}
-
-@media only screen and (max-width: 768px) {
-    .Action-bar {
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: space-around;
-        height: 125px;
-    }
-
-    .Action-bar .Back-button {
-        display: none;
-    }
-
-    .Action-bar .Register-button button {
-        width: 100%;
-    }
-
 }
 
 .Login-Form {
@@ -45,4 +21,27 @@
     justify-content: center;
     width: 50vw;
 }
+
+@media only screen and (max-width: 768px) {
+    .Action-bar {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-around;
+        height: 125px;
+    }
+
+    .Action-bar .Back-button {
+        display: none;
+    }
+
+    .Action-bar .Register-button button {
+        width: 100%;
+    }
+
+    .Login {
+        width: 95vw;
+    }
+
+}
+
 

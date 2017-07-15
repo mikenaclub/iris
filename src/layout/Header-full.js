@@ -4,12 +4,38 @@
 import React, {Component} from 'react';
 import logo from '../logo.svg';
 import './Header-full.css'
+import {CSSTransition} from 'react-transition-group';
+
 class FullHeader extends Component {
+    constructor(...args) {
+        super(...args);
+        this.state = {show: false}
+    }
+
+    componentDidMount() {
+        this.setState({show: true})
+    }
+
+    componentWillUnmount() {
+        this.setState({show: false})
+    }
+
     render() {
         return (
-            <div className="App-header-full">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <h2>Monoitio</h2>
+            <div>
+
+                <CSSTransition
+                    timeout={5000}
+                    classNames="App-header-full"
+                    in={this.state.show}
+                    mountOnEnter={true}
+                    unmountOnExit={true}
+                >
+                    <div className="App-header-full">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <h2>Monoitio - Smart Reminder App , ever .</h2>
+                    </div>
+                </CSSTransition>
             </div>
         )
     }
