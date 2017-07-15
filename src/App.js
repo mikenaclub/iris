@@ -31,23 +31,40 @@ const Register = () => (
 class App extends Component {
     render() {
         return (
-            <div className="App">
-                <Header/>
+            <div >
                 <Router>
-                    <Route render={({history: {location}}) =>
-                        <div className="App-detail">
-                            <TransitionGroup className="App-detail-Transition">
-                                <CSSTransition key={location.key} timeout={500} classNames="fade" mountOnEnter={true}
-                                               unmountOnExit={true}>
-                                    <Switch location={location}>
-                                        <Route exact path="/" component={Home}/>
-                                        <Route path="/Login" component={LoginFrom}/>
-                                        <Route path="/Register" component={Register}/>
-                                    </Switch>
-                                </CSSTransition>
-                            </TransitionGroup>
-                        </div>
-                    }/>
+                    <div className="App">
+                        <Route render={({history: {location}}) =>
+                            <div>
+
+                                <TransitionGroup className="App-detail-Transition">
+                                    <CSSTransition key={location.key} timeout={1000} classNames="test"
+                                                   mountOnEnter={true}
+                                                   unmountOnExit={true}>
+                                        <Switch location={location}>
+                                            <Route exact path="/" component={FullHeader}/>
+                                            <Route component={Header}/>
+                                        </Switch>
+                                    </CSSTransition>
+                                </TransitionGroup>
+                            </div>
+                        }/>
+                        <Route render={({history: {location}}) =>
+                            <div className="App-detail">
+                                <TransitionGroup className="App-detail-Transition">
+                                    <CSSTransition key={location.key} timeout={1000} classNames="fade"
+                                                   mountOnEnter={true}
+                                                   unmountOnExit={true}>
+                                        <Switch location={location}>
+                                            <Route exact path="/" component={Home}/>
+                                            <Route path="/Login" component={LoginFrom}/>
+                                            <Route path="/Register" component={Register}/>
+                                        </Switch>
+                                    </CSSTransition>
+                                </TransitionGroup>
+                            </div>
+                        }/>
+                    </div>
                 </Router>
             </div>
         );
