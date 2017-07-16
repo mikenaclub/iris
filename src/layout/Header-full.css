@@ -1,7 +1,7 @@
 .App-header-full {
     width: 100%;
     background-color: #222;
-    height: 150px;
+    height: 200px;
     color: white;
     padding: 20px;
 }
@@ -12,5 +12,5 @@
 }
 
 .App-header-full-enter.App-header-full-enter-active {
-    height: 150px !important;
+    height: 200px !important;
 }

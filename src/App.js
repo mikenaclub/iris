@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import {HashRouter  as Router, Route, Link, Switch} from 'react-router-dom';
 import './App.css';
-import {Button, Message} from 'semantic-ui-react';
+import {Button} from 'semantic-ui-react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
@@ -51,7 +51,7 @@ class App extends Component {
                                     <CSSTransition key={location.key} timeout={1000} classNames="fade"
                                                    mountOnEnter={true}
                                                    unmountOnExit={true}>
-                                        <Switch location={location}>
+                                        <Switch>
                                             <Route exact path="/" component={Home}/>
                                             <Route path="/Login" component={LoginFrom}/>
                                             <Route path="/Register" component={Register}/>

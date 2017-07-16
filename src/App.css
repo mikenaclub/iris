@@ -25,7 +25,7 @@
 }
 
 .App-detail {
-    min-height: calc(100% - 150px);
+    min-height: calc(100% - 200px);
     height: 100%;
 }
 
