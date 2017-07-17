@@ -1,6 +1,8 @@
 {
   "name": "monitio",
   "version": "0.1.2-alpha",
+  "homepage": ".",
+  "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
     "react": "^15.6.1",
