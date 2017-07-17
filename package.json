@@ -1,6 +1,6 @@
 {
   "name": "monitio",
-  "version": "0.1.1-alpha",
+  "version": "0.1.2-alpha",
   "homepage": "https://neetchanathip.github.io/monitio-frontend",
   "private": true,
   "dependencies": {
