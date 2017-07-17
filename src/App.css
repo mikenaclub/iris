@@ -31,7 +31,7 @@
 
 .App-home {
     margin: auto;
-    height: 100%;
+    height: calc(100vh - 200px);
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -53,8 +53,12 @@ class App extends Component {
                                                    unmountOnExit={true}>
                                         <Switch>
                                             <Route exact path="/" component={Home}/>
-                                            <Route path="/Login" component={LoginFrom}/>
-                                            <Route path="/Register" component={Register}/>
+                                            <Route children={() => (
+                                                <Switch>
+                                                    <Route path="/Login" component={LoginFrom}/>
+                                                    <Route path="/Register" component={Register}/>
+                                                </Switch>
+                                            )}/>
                                         </Switch>
                                     </CSSTransition>
                                 </TransitionGroup>
