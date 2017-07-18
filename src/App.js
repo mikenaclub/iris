@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
-import {BrowserRouter  as Router, Route, Link, Switch} from 'react-router-dom';
+import {Router, Route, Link, Switch} from 'react-router-dom';
+import {createBrowserHistory, createHashHistory} from 'history';
 import './App.css';
 import {Button} from 'semantic-ui-react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
+
+const history = ()=>{
+    return window.matchMedia('(display-mode: standalone)').matches
+        ? createHashHistory()
+        : createBrowserHistory()
+}
 
 const Home = () => (
     <div className="App-home">
@@ -20,15 +27,6 @@ const Home = () => (
     </div>
 );
 
-
-const Register = () => (
-    <div className="App-home">
-        <h1>Register</h1>
-        <p> in development. </p>
-        <Link to="..">back</Link>
-    </div>
-);
-
 class App extends Component {
     constructor(...args) {
         super(...args);
@@ -39,7 +37,7 @@ class App extends Component {
     render() {
         return (
             <div >
-                <Router>
+                <Router history={history}>
                     <div className="App">
                         <Switch>
                             <Route exact path="/" component={FullHeader}/>
