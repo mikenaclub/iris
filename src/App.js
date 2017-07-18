@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {HashRouter  as Router, Route, Link, Switch} from 'react-router-dom';
+import {BrowserRouter  as Router, Route, Link, Switch} from 'react-router-dom';
 import './App.css';
 import {Button} from 'semantic-ui-react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
