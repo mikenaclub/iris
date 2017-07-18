@@ -57,7 +57,7 @@ class App extends Component {
                         <Route render={({history: {location}}) =>
                             <div className="App-detail">
                                 <TransitionGroup className="App-detail-Transition">
-                                    <CSSTransition key={location.key} timeout={500} classNames="fade"
+                                    <CSSTransition key={location.key} timeout={1000} classNames="fade"
                                                    mountOnEnter={true}
                                                    unmountOnExit={true}>
                                         <Switch>
