@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Router, Route, Link, Switch} from 'react-router-dom';
-import {createBrowserHistory, createHashHistory} from 'history';
+import {BrowserRouter, HashRouter, Route, Link, Switch} from 'react-router-dom';
 import './App.css';
 import {Button} from 'semantic-ui-react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
@@ -8,11 +7,23 @@ import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
 
-const history = ()=>{
+/*var AppRouter = () => {
     return window.matchMedia('(display-mode: standalone)').matches
-        ? createHashHistory()
-        : createBrowserHistory()
-}
+        ? HashRouter
+        : BrowserRouter
+}*/
+const AppRouter = window.matchMedia('(display-mode: standalone)').matches
+    ? HashRouter
+    : BrowserRouter;
+
+
+const Register = () => (
+    <div className="App-home">
+        <h1>Register</h1>
+        <p> in development. </p>
+        <Link to="..">back</Link>
+    </div>
+);
 
 const Home = () => (
     <div className="App-home">
@@ -36,8 +47,8 @@ class App extends Component {
 
     render() {
         return (
-            <div >
-                <Router history={history}>
+            <div>
+                <AppRouter>
                     <div className="App">
                         <Switch>
                             <Route exact path="/" component={FullHeader}/>
@@ -46,7 +57,7 @@ class App extends Component {
                         <Route render={({history: {location}}) =>
                             <div className="App-detail">
                                 <TransitionGroup className="App-detail-Transition">
-                                    <CSSTransition key={location.key} timeout={1000} classNames="fade"
+                                    <CSSTransition key={location.key} timeout={500} classNames="fade"
                                                    mountOnEnter={true}
                                                    unmountOnExit={true}>
                                         <Switch>
@@ -63,7 +74,7 @@ class App extends Component {
                             </div>
                         }/>
                     </div>
-                </Router>
+                </AppRouter>
             </div>
         );
     }
