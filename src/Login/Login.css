@@ -1,8 +1,10 @@
-.Action-bar {
+.Action-group {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
     margin-top: 5vh;
+    height: 100px;
 }
 
 .Login-Form {
@@ -11,6 +13,8 @@
 
 .Form-title {
     margin-bottom: 5vh;
+    display: flex;
+    align-items: center;
 }
 
 .Login {
@@ -22,24 +26,28 @@
     width: 50vw;
 }
 
+.Login-button {
+    width: 40%;
+}
+
 @media only screen and (max-width: 768px) {
-    .Action-bar {
+    .Action-group {
         flex-direction: column;
         align-items: stretch;
         justify-content: space-around;
         height: 125px;
     }
 
-    .Action-bar .Back-button {
-        display: none;
-    }
-
-    .Action-bar .Register-button button {
-        width: 100%;
+    .Register-button {
+        text-align: center;
     }
 
     .Login {
         width: 95vw;
+    }
+
+    .Login-button {
+        width: 100%;
     }
 
 }
