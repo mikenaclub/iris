@@ -4,6 +4,10 @@
     height: 200px;
     color: white;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .App-header-full-enter {

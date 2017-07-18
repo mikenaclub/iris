@@ -32,7 +32,7 @@ class Header extends Component {
                 >
                     <div className="App-header">
                         <img src={logo} className="App-logo-small" alt="logo"/>
-                        <p>Monoitio</p>
+                        <p> Monoitio - Pre-release 0.1.4 </p>
                     </div>
                 </CSSTransition>
             </div>

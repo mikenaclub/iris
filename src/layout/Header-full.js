@@ -33,7 +33,7 @@ class FullHeader extends Component {
                 >
                     <div className="App-header-full">
                         <img src={logo} className="App-logo" alt="logo"/>
-                        <h2> Monoitio - Pre-release 0.1.3 </h2>
+                        <h2> Monoitio - Pre-release 0.1.4 </h2>
                     </div>
                 </CSSTransition>
             </div>
