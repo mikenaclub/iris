@@ -1,10 +1,11 @@
 {
   "name": "monitio",
-  "version": "0.1.2-alpha",
-  "homepage": "https://neetchanathip.github.io/monitio-frontend",
+  "version": "0.1.4",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
+    "history": "^4.6.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",

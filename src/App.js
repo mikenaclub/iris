@@ -1,11 +1,29 @@
 import React, {Component} from 'react';
-import {HashRouter  as Router, Route, Link, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, Link, Switch} from 'react-router-dom';
 import './App.css';
 import {Button} from 'semantic-ui-react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
+
+/*var AppRouter = () => {
+    return window.matchMedia('(display-mode: standalone)').matches
+        ? HashRouter
+        : BrowserRouter
+}*/
+const AppRouter = window.matchMedia('(display-mode: standalone)').matches
+    ? HashRouter
+    : BrowserRouter;
+
+
+const Register = () => (
+    <div className="App-home">
+        <h1>Register</h1>
+        <p> in development. </p>
+        <Link to="..">back</Link>
+    </div>
+);
 
 const Home = () => (
     <div className="App-home">
@@ -20,15 +38,6 @@ const Home = () => (
     </div>
 );
 
-
-const Register = () => (
-    <div className="App-home">
-        <h1>Register</h1>
-        <p> in development. </p>
-        <Link to="..">back</Link>
-    </div>
-);
-
 class App extends Component {
     constructor(...args) {
         super(...args);
@@ -38,8 +47,8 @@ class App extends Component {
 
     render() {
         return (
-            <div >
-                <Router>
+            <div>
+                <AppRouter>
                     <div className="App">
                         <Switch>
                             <Route exact path="/" component={FullHeader}/>
@@ -65,7 +74,7 @@ class App extends Component {
                             </div>
                         }/>
                     </div>
-                </Router>
+                </AppRouter>
             </div>
         );
     }
