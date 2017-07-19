@@ -2,29 +2,27 @@
  * Created by STR02119 on 7/17/2017.
  */
 import React, {Component} from 'react';
-import { Button, Form } from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
 import './Register.css'
 import $ from 'jquery';
-class RegisterForm extends Component{
+
+class RegisterForm extends Component {
     constructor() {
         super();
         this.state = {
-            stateloading: false
+            stateloading: false,
+            stateusername: "",
+            statepassword: ""
         };
-        this.state ={
-            stateusername:""
-        }
-        this.state ={
-            statepassword:""
-        }
     }
-    handleusername = (e) =>{
+
+    handleusername = (e) => {
         this.setState({
             stateusername: e.target.value
         })
     }
-    handlepassword = (e) =>{
+    handlepassword = (e) => {
         this.setState({
             statepassword: e.target.value
         })
@@ -36,8 +34,8 @@ class RegisterForm extends Component{
             stateloading: true
         });
         let userinfo = {}
-        userinfo.username =this.state.stateusername
-        userinfo.password =this.state.statepassword
+        userinfo.username = this.state.stateusername
+        userinfo.password = this.state.statepassword
         console.log(userinfo)
         let userinfojson = JSON.stringify(userinfo)
         console.log(userinfojson)
@@ -47,16 +45,17 @@ class RegisterForm extends Component{
             data: userinfojson,
             contentType: "application/json; charset=utf-8",
             success: (respons) => {
-                this.setState({ stateloading:false })
+                this.setState({stateloading: false})
             }
         })
     }
-    handleStopLoading = (e) =>{
+    handleStopLoading = (e) => {
         this.setState({
-            stateloading: this.state.stateloading =false
+            stateloading: false
         })
     }
-    render(){
+
+    render() {
         return (
             <div className="Register">
 
@@ -65,11 +64,13 @@ class RegisterForm extends Component{
                 <Form loading={this.state.stateloading}>
                     <Form.Field required>
                         <label className="labelform">Username</label>
-                        <input type="text" placeholder="Username" value={this.state.stateusername} onChange={this.handleusername}/>
+                        <input type="text" placeholder="Username" value={this.state.stateusername}
+                               onChange={this.handleusername}/>
                     </Form.Field>
                     <Form.Field required>
                         <label className="labelform">Password</label>
-                        <input type="password" placeholder="Password" value={this.state.statepassword} onChange={this.handlepassword}/>
+                        <input type="password" placeholder="Password" value={this.state.statepassword}
+                               onChange={this.handlepassword}/>
                     </Form.Field>
                     <div className="groupbutton">
                         <Link to='/'>
