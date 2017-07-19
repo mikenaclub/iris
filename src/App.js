@@ -6,6 +6,7 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
+import RegisterForm from './Register/Register';
 
 const Home = () => (
     <div className="App-home">
@@ -21,13 +22,13 @@ const Home = () => (
 );
 
 
-const Register = () => (
+/*const Register = () => (
     <div className="App-home">
         <h1>Register</h1>
         <p> in development. </p>
         <Link to="..">back</Link>
     </div>
-);
+);*/
 
 class App extends Component {
     constructor(...args) {
@@ -56,7 +57,7 @@ class App extends Component {
                                             <Route children={() => (
                                                 <Switch>
                                                     <Route path="/Login" component={LoginFrom}/>
-                                                    <Route path="/Register" component={Register}/>
+                                                    <Route path="/Register" component={RegisterForm}/>
                                                 </Switch>
                                             )}/>
                                         </Switch>
