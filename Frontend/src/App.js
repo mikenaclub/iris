@@ -6,6 +6,7 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
+import RegisterForm from './Register/Register';
 
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
@@ -57,7 +58,7 @@ class App extends Component {
                                             <Route children={() => (
                                                 <Switch>
                                                     <Route path="/Login" component={LoginFrom}/>
-                                                    <Route path="/Register" component={Register}/>
+                                                    <Route path="/Register" component={RegisterForm}/>
                                                 </Switch>
                                             )}/>
                                         </Switch>
