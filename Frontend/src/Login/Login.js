@@ -18,7 +18,7 @@ class LoginFrom extends Component {
                         </Link>Login to App
                     </h1>
                     <Form.Field>
-                        <input placeholder='email'/>
+                        <input placeholder='username'/>
                     </Form.Field>
                     <Form.Field>
                         <input placeholder='password'/>
