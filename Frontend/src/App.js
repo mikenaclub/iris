@@ -6,12 +6,8 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
+import RegisterForm from './Register/Register';
 
-/*var AppRouter = () => {
-    return window.matchMedia('(display-mode: standalone)').matches
-        ? HashRouter
-        : BrowserRouter
-}*/
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
     : BrowserRouter;
@@ -27,9 +23,6 @@ const Register = () => (
 
 const Home = () => (
     <div className="App-home">
-        <p className="App-intro">
-            Welcome!
-        </p>
         <Button.Group size='massive'>
             <Link to="/Login"><Button positive>Login</Button></Link>
             <Button.Or text='or'/>
@@ -57,7 +50,7 @@ class App extends Component {
                         <Route render={({history: {location}}) =>
                             <div className="App-detail">
                                 <TransitionGroup className="App-detail-Transition">
-                                    <CSSTransition key={location.key} timeout={1000} classNames="fade"
+                                    <CSSTransition key={location.key} timeout={500} classNames="fade"
                                                    mountOnEnter={true}
                                                    unmountOnExit={true}>
                                         <Switch>
@@ -65,7 +58,7 @@ class App extends Component {
                                             <Route children={() => (
                                                 <Switch>
                                                     <Route path="/Login" component={LoginFrom}/>
-                                                    <Route path="/Register" component={Register}/>
+                                                    <Route path="/Register" component={RegisterForm}/>
                                                 </Switch>
                                             )}/>
                                         </Switch>

@@ -5,6 +5,9 @@ import React, {Component} from 'react';
 import logo from '../logo.svg';
 import './Header.css'
 import {CSSTransition} from 'react-transition-group';
+import AppSetting from '../share/app-setting';
+import {Button, Dropdown} from 'semantic-ui-react';
+import AppLanguage from '../share/app-langauge'
 
 class Header extends Component {
     constructor(...args) {
@@ -32,11 +35,18 @@ class Header extends Component {
                 >
                     <div className="App-header">
                         <img src={logo} className="App-logo-small" alt="logo"/>
-                        <p> Monoitio - Pre-release 0.1.4 </p>
+                        <div> {AppSetting.AppName} - {AppSetting.AppVersion} </div>
+                        &nbsp;&nbsp;
+
+                        <Button.Group size="small" color='blue'>
+                            <Dropdown Dropdown floating button options={AppLanguage}
+                                      defaultValue={AppLanguage[0].value}/>
+                        </Button.Group>
                     </div>
                 </CSSTransition>
             </div>
         )
     }
 }
+
 export default Header;

@@ -1,6 +1,6 @@
 {
-  "name": "monitio",
-  "version": "0.1.4",
+  "name": "Eris",
+  "version": "0.2.1",
   "homepage": ".",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "set PORT=8080 && react-scripts start",
+    "start": "set PORT=8090 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
