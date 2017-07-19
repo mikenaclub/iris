@@ -54,18 +54,12 @@ class RegisterForm extends Component {
             }
         })
     }
-    handleStopLoading = (e) => {
-        this.setState({
-            stateloading: false
-        })
-    }
 
     render() {
         return (
             <div className="Register">
 
-                <h1 className="pagename">Register</h1>
-                <Button onClick={this.handleStopLoading}>Stop Load</Button>
+                <h1 className="title">Register</h1>
                 <Form loading={this.state.stateloading}>
                     <Form.Field required>
                         <label className="labelform">Username</label>
@@ -82,7 +76,6 @@ class RegisterForm extends Component {
                             <Button>Back</Button>
                         </Link>
                         <Button onClick={this.handleClick}>OK</Button>
-                        <Button>RESET</Button>
                     </div>
                 </Form>
             </div>

@@ -21,15 +21,6 @@ const Home = () => (
     </div>
 );
 
-
-/*const Register = () => (
-    <div className="App-home">
-        <h1>Register</h1>
-        <p> in development. </p>
-        <Link to="..">back</Link>
-    </div>
-);*/
-
 class App extends Component {
     constructor(...args) {
         super(...args);
