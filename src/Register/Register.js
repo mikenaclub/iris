@@ -45,6 +45,11 @@ class RegisterForm extends Component {
             data: userinfojson,
             contentType: "application/json; charset=utf-8",
             success: (respons) => {
+                console.log("Login Success")
+                this.setState({stateloading: false})
+            },
+            error: (respons) => {
+                console.log(respons)
                 this.setState({stateloading: false})
             }
         })
