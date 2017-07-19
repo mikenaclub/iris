@@ -24,3 +24,5 @@ yarn-error.log*
 
 Frontend/node_modules/
 Frontend/build/
+.netlify
+public/_redirects
