@@ -7,11 +7,6 @@ import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
 import LoginFrom from './Login/Login';
 
-/*var AppRouter = () => {
-    return window.matchMedia('(display-mode: standalone)').matches
-        ? HashRouter
-        : BrowserRouter
-}*/
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
     : BrowserRouter;
@@ -27,9 +22,6 @@ const Register = () => (
 
 const Home = () => (
     <div className="App-home">
-        <p className="App-intro">
-            Welcome!
-        </p>
         <Button.Group size='massive'>
             <Link to="/Login"><Button positive>Login</Button></Link>
             <Button.Or text='or'/>

@@ -5,11 +5,16 @@ import React, {Component} from 'react';
 import logo from '../logo.svg';
 import './Header-full.css'
 import {CSSTransition} from 'react-transition-group';
+import AppSetting from '../share/app-setting';
+import {Dropdown, Button} from 'semantic-ui-react';
+import AppLanguage from '../share/app-langauge'
 
 class FullHeader extends Component {
     constructor(...args) {
         super(...args);
-        this.state = {show: false}
+        this.state = {
+            show: false
+        }
     }
 
     componentDidMount() {
@@ -33,11 +38,19 @@ class FullHeader extends Component {
                 >
                     <div className="App-header-full">
                         <img src={logo} className="App-logo" alt="logo"/>
-                        <h2> Monoitio - Pre-release 0.1.4 </h2>
+                        <h2> {AppSetting.AppName} - {AppSetting.AppVersion} </h2>
+                        <div>
+                            Currently language&nbsp;&nbsp;
+                            <Button.Group size="small" color='blue'>
+                                <Dropdown Dropdown floating button options={AppLanguage}
+                                          defaultValue={AppLanguage[0].value}/>
+                            </Button.Group>
+                        </div>
                     </div>
                 </CSSTransition>
             </div>
         )
     }
 }
+
 export default FullHeader;
