@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BCrypt {
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String encode(String password) {
         System.out.println("Encode !!!");

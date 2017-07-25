@@ -1,41 +1,39 @@
 package com.example.demo.Usercontroller;
 
-import com.example.demo.HashingPassword.BCrypt;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by STR02119 on 7/18/2017.
  */
 @CrossOrigin(origins = "http://localhost:8090")
 @RestController
-@RequestMapping("/api")
-public class Usercontroller {
+@RequestMapping("/registerApi/v1/")
+public class UserController {
+
+    private final UserRepository userRepository;
 
     @Autowired
-    Userrepository userrepository;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    @RequestMapping("/queryall")
-    public List<Usermodel> queryall() {
-        List<Usermodel> user = userrepository.queryall();
+    @RequestMapping(value = "/user",method = RequestMethod.GET)
+    public List<UserModel> queryall() {
+        List<UserModel> user = userRepository.queryall();
         return user;
     }
 
-    @RequestMapping("/registeruser")
-    public ResponseEntity<?> registeruser(@RequestBody String userinfo) {
-        System.out.println("Regis Start!!!");
-        System.out.println(userinfo);
+    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    public ResponseEntity<?> registerUser(@RequestBody String userInfo) {
         Gson gson = new Gson();
-        Usermodel user = gson.fromJson(userinfo, Usermodel.class);
-        boolean result = userrepository.register(user);
+        UserModel user = gson.fromJson(userInfo, UserModel.class);
+        boolean result = userRepository.register(user);
         System.out.println(result);
         if (result)
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
@@ -44,12 +42,12 @@ public class Usercontroller {
     }
 
     @RequestMapping("/login")
-    public ResponseEntity<?> Login(@RequestBody String userinfo) {
+    public ResponseEntity<?> Login(@RequestBody String userInfo) {
         System.out.println("Login!!!");
-        System.out.println(userinfo);
+        System.out.println(userInfo);
         Gson gson = new Gson();
-        Usermodel user = gson.fromJson(userinfo, Usermodel.class);
-        boolean result = userrepository.login(user);
+        UserModel user = gson.fromJson(userInfo, UserModel.class);
+        boolean result = userRepository.login(user);
 
         if (result)
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);

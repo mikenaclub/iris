@@ -11,46 +11,46 @@ class RegisterForm extends Component {
     constructor() {
         super();
         this.state = {
-            stateloading: false,
-            stateusername: "",
-            statepassword: ""
+            loading: false,
+            username: "",
+            password: ""
         };
     }
 
     handleusername = (e) => {
         this.setState({
-            stateusername: e.target.value
+            username: e.target.value
         })
     }
     handlepassword = (e) => {
         this.setState({
-            statepassword: e.target.value
+            password: e.target.value
         })
     }
 
 
     handleClick = (e) => {
         this.setState({
-            stateloading: true
+            loading: true
         });
-        let userinfo = {}
-        userinfo.username = this.state.stateusername
-        userinfo.password = this.state.statepassword
-        console.log(userinfo)
-        let userinfojson = JSON.stringify(userinfo)
-        console.log(userinfojson)
+        let userInfo = {}
+        userInfo.username = this.state.username
+        userInfo.password = this.state.password
+        console.log(userInfo)
+        let userInfoJson = JSON.stringify(userInfo)
+        console.log(userInfoJson)
         $.ajax({
-            url: "http://localhost:8080/api/registeruser",
+            url: "http://localhost:8080/registerApi/v1/user",
             type: "POST",
-            data: userinfojson,
+            data: userInfoJson,
             contentType: "application/json; charset=utf-8",
-            success: (respons) => {
+            success: (response) => {
                 console.log("login Success")
-                this.setState({stateloading: false})
+                this.setState({loading: false})
             },
-            error: (respons) => {
-                console.log(respons)
-                this.setState({stateloading: false})
+            error: (response) => {
+                console.log(response)
+                this.setState({loading: false})
             }
         })
     }
@@ -60,15 +60,15 @@ class RegisterForm extends Component {
             <div className="Register">
 
                 <h1 className="title">Register</h1>
-                <Form loading={this.state.stateloading}>
+                <Form loading={this.state.loading}>
                     <Form.Field required>
                         <label className="labelform">Username</label>
-                        <input type="text" placeholder="Username" value={this.state.stateusername}
+                        <input type="text" placeholder="Username" value={this.state.username}
                                onChange={this.handleusername}/>
                     </Form.Field>
                     <Form.Field required>
                         <label className="labelform">Password</label>
-                        <input type="password" placeholder="Password" value={this.state.statepassword}
+                        <input type="password" placeholder="Password" value={this.state.password}
                                onChange={this.handlepassword}/>
                     </Form.Field>
                     <div className="groupbutton">
