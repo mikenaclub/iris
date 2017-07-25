@@ -5,7 +5,7 @@
     color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .App-logo-small {
@@ -20,4 +20,8 @@
 
 .App-header-small-enter.App-header-small-enter-active {
     height: 50px !important;
+}
+
+.App-title {
+    flex: 1;
 }

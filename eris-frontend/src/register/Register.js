@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import './Register.css'
 import $ from 'jquery';
 import {registerConnetionString} from '../share/app-connection';
+import {CSSTransition} from 'react-transition-group';
 
 class RegisterForm extends Component {
     constructor() {
@@ -15,8 +16,17 @@ class RegisterForm extends Component {
             loading: false,
             username: "",
             password: "",
-            reEnterPassword: ""
+            reEnterPassword: "",
+            show: false
         };
+    }
+
+    componentDidMount() {
+        this.setState({show: true})
+    }
+
+    componentWillUnmount() {
+        this.setState({show: false})
     }
 
     onUsernameChange = (e) => {
@@ -63,31 +73,39 @@ class RegisterForm extends Component {
         return (
             <div className="Register">
 
-                <Form className="Register-Form" loading={this.state.loading} size="big">
-                    <h1 className="Title">Register
-                    </h1>
-                    <Form.Field>
-                        <input type="text" placeholder="Username" value={this.state.username}
-                               onChange={this.onUsernameChange}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <input type="password" placeholder="password" value={this.state.password}
-                               onChange={this.onPasswordChange}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <input type="password" placeholder="repassword" value={this.state.reEnterPassword}
-                               onChange={this.onReEnterPasswordChange}/>
-                    </Form.Field>
-                    <div className="Group-Button">
-                        <Button className="Register-button" size='big' onClick={this.handleClick}
-                                positive>Register</Button>
-                        <Link to="../Login">
-                            <div className="GotoLogin-button">
-                                already have account? Log in!
-                            </div>
-                        </Link>
-                    </div>
-                </Form>
+                <CSSTransition
+                    timeout={300}
+                    classNames="fade"
+                    in={this.state.show}
+                    mountOnEnter={true}
+                    unmountOnExit={true}
+                >
+                    <Form className="Register-Form" loading={this.state.loading} size="big">
+                        <h1 className="Title">Register
+                        </h1>
+                        <Form.Field>
+                            <input type="text" placeholder="Username" value={this.state.username}
+                                   onChange={this.onUsernameChange}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <input type="password" placeholder="password" value={this.state.password}
+                                   onChange={this.onPasswordChange}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <input type="password" placeholder="repassword" value={this.state.reEnterPassword}
+                                   onChange={this.onReEnterPasswordChange}/>
+                        </Form.Field>
+                        <div className="Group-Button">
+                            <Button className="Register-button" size='big' onClick={this.handleClick}
+                                    positive>Register</Button>
+                            <Link to="../login">
+                                <div className="GotoLogin-button">
+                                    already have account? Log in!
+                                </div>
+                            </Link>
+                        </div>
+                    </Form>
+                </CSSTransition>
             </div>
         )
     }

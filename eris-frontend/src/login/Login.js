@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import {Button, Form} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
+import {CSSTransition} from 'react-transition-group';
 import './Login.css';
 import $ from 'jquery';
 
@@ -12,8 +13,17 @@ class LoginFrom extends Component {
         super();
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            show: false
         }
+    }
+
+    componentDidMount() {
+        this.setState({show: true})
+    }
+
+    componentWillUnmount() {
+        this.setState({show: false})
     }
 
     onUsernameChange = (e) => {
@@ -31,6 +41,7 @@ class LoginFrom extends Component {
         /*fetch('http://localhost:8092/login/query', {
             method: 'GET'
         }).then((response) => console.log(response));*/
+
         let userInfo = {}
         userInfo.username = this.state.username
         userInfo.password = this.state.password
@@ -54,28 +65,36 @@ class LoginFrom extends Component {
     render() {
         return (
             <div className="Login">
-                <Form className="Login-Form" size="big">
-                    <h1 className="Form-title">Login to App
-                    </h1>
-                    <Form.Field>
-                        <input onChange={this.onUsernameChange} placeholder='username'/>
-                    </Form.Field>
-                    <Form.Field>
-                        <input type="password" onChange={this.onPasswordChange} placeholder='password'/>
-                    </Form.Field>
-                    <div className="Action-group">
-                        <Button animated='fade' size='big' type='submit' positive className="Login-button"
-                                onClick={this.onLoginBtnClick}>
-                            <Button.Content visible>Login</Button.Content>
-                            <Button.Content hidden>Click</Button.Content>
-                        </Button>
-                        <Link to="../Register">
-                            <div className="GoToRegister-button">
-                                Don't have account? Register!
-                            </div>
-                        </Link>
-                    </div>
-                </Form>
+                <CSSTransition
+                    timeout={300}
+                    classNames="fade"
+                    in={this.state.show}
+                    mountOnEnter={true}
+                    unmountOnExit={true}
+                >
+                    <Form className="Login-Form" size="big">
+                        <h1 className="Form-title">Login to App
+                        </h1>
+                        <Form.Field>
+                            <input onChange={this.onUsernameChange} placeholder='username'/>
+                        </Form.Field>
+                        <Form.Field>
+                            <input type="password" onChange={this.onPasswordChange} placeholder='password'/>
+                        </Form.Field>
+                        <div className="Action-group">
+                            <Button animated='fade' size='big' type='submit' positive className="Login-button"
+                                    onClick={this.onLoginBtnClick}>
+                                <Button.Content visible>Login</Button.Content>
+                                <Button.Content hidden>Click</Button.Content>
+                            </Button>
+                            <Link to="../register">
+                                <div className="GoToRegister-button">
+                                    Don't have account? Register!
+                                </div>
+                            </Link>
+                        </div>
+                    </Form>
+                </CSSTransition>
             </div>
         )
     }
