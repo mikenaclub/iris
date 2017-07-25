@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by STR02119 on 7/18/2017.
  */
-@CrossOrigin(origins = "http://localhost:8090")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/registerApi/v1/")
 public class UserController {
@@ -23,7 +23,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "/user",method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public List<UserModel> queryall() {
         List<UserModel> user = userRepository.queryall();
         return user;

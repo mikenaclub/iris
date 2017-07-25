@@ -6,6 +6,7 @@ import {Button, Form} from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
 import './Register.css'
 import $ from 'jquery';
+import {registerConnetionString} from '../share/app-connection';
 
 class RegisterForm extends Component {
     constructor() {
@@ -13,23 +14,24 @@ class RegisterForm extends Component {
         this.state = {
             loading: false,
             username: "",
-            password: ""
+            password: "",
+            reEnterPassword: ""
         };
     }
 
-    handleusername = (e) => {
+    onUsernameChange = (e) => {
         this.setState({
             username: e.target.value
         })
     }
-    handlepassword = (e) => {
+    onPasswordChange = (e) => {
         this.setState({
             password: e.target.value
         })
     }
-    handlerepassword = (e) =>{
+    onReEnterPasswordChange = (e) => {
         this.setState({
-            repassword: e.target.value
+            reEnterPassword: e.target.value
         })
     }
 
@@ -44,16 +46,14 @@ class RegisterForm extends Component {
         let userInfoJson = JSON.stringify(userInfo)
         console.log(userInfoJson)
         $.ajax({
-            url: "http://localhost:8080/registerApi/v1/user",
+            url: registerConnetionString,
             type: "POST",
             data: userInfoJson,
             contentType: "application/json; charset=utf-8",
             success: (response) => {
-                console.log("login Success")
                 this.setState({loading: false})
             },
             error: (response) => {
-                console.log(response)
                 this.setState({loading: false})
             }
         })
@@ -63,37 +63,27 @@ class RegisterForm extends Component {
         return (
             <div className="Register">
 
-                <Form className="Register-Form" loading={this.state.stateloading}>
-                    <h1 className="Title">
-                        <Link to="..">
-                            <Button circular icon='arrow left' color='black'/>
-                        </Link>Register
+                <Form className="Register-Form" loading={this.state.loading} size="big">
+                    <h1 className="Title">Register
                     </h1>
                     <Form.Field>
-                        <input placeholder="username" value={this.state.stateusername}
-                <h1 className="title">Register</h1>
-                <Form loading={this.state.loading}>
-                    <Form.Field required>
-                        <label className="labelform">Username</label>
                         <input type="text" placeholder="Username" value={this.state.username}
-                               onChange={this.handleusername}/>
-                    </Form.Field>
-                    <Form.Field required>
-                        <label className="labelform">Password</label>
-                        <input type="password" placeholder="Password" value={this.state.password}
-                    <Form.Field>
-                        <input type="password" placeholder="password" value={this.state.statepassword}
-                               onChange={this.handlepassword}/>
+                               onChange={this.onUsernameChange}/>
                     </Form.Field>
                     <Form.Field>
-                        <input type="password" placeholder="repassword" value={this.state.repassword}
-                                onChange={this.handlerepassword}/>
+                        <input type="password" placeholder="password" value={this.state.password}
+                               onChange={this.onPasswordChange}/>
+                    </Form.Field>
+                    <Form.Field>
+                        <input type="password" placeholder="repassword" value={this.state.reEnterPassword}
+                               onChange={this.onReEnterPasswordChange}/>
                     </Form.Field>
                     <div className="Group-Button">
-                        <Button className="Register-button" size='big' onClick={this.handleClick} positive>Register</Button>
+                        <Button className="Register-button" size='big' onClick={this.handleClick}
+                                positive>Register</Button>
                         <Link to="../Login">
                             <div className="GotoLogin-button">
-                                or Login
+                                already have account? Log in!
                             </div>
                         </Link>
                     </div>

@@ -39,7 +39,7 @@ class Header extends Component {
                         &nbsp;&nbsp;
 
                         <Button.Group size="small" color='blue'>
-                            <Dropdown Dropdown floating button options={AppLanguage}
+                            <Dropdown floating button options={AppLanguage}
                                       defaultValue={AppLanguage[0].value}/>
                         </Button.Group>
                     </div>

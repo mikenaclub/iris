@@ -8,45 +8,45 @@ import './Login.css';
 import $ from 'jquery';
 
 class LoginFrom extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state ={
+        this.state = {
             username: "",
             password: ""
         }
     }
 
-    handleChangename = (e) =>{
+    onUsernameChange = (e) => {
         this.setState({
-            username : e.target.value
+            username: e.target.value
         })
     }
-    handleChangepassword = (e) =>{
+    onPasswordChange = (e) => {
         this.setState({
-            password : e.target.value
+            password: e.target.value
         })
     }
 
-    login = (e) => {
+    onLoginBtnClick = () => {
         /*fetch('http://localhost:8092/login/query', {
             method: 'GET'
         }).then((response) => console.log(response));*/
-        let userinfo = {}
-        userinfo.username = this.state.username
-        userinfo.password = this.state.password
-        console.log(userinfo)
-        let userinfojson = JSON.stringify(userinfo)
-        console.log(userinfojson)
+        let userInfo = {}
+        userInfo.username = this.state.username
+        userInfo.password = this.state.password
+        console.log(userInfo)
+        let userInfoJson = JSON.stringify(userInfo)
+        console.log(userInfoJson)
         $.ajax({
-            url: "http://localhost:8092/login/login",
+            url: "http://localhost:8091/onLoginBtnClick/onLoginBtnClick",
             type: "post",
-            data: userinfojson,
+            data: userInfoJson,
             contentType: "application/json; charset=utf-8",
-            success: (respons) => {
-                console.log(respons)
+            success: (response) => {
+                console.log(response)
             },
-            error: (respons) => {
-                console.log(respons)
+            error: (response) => {
+                console.log(response)
             }
         })
     }
@@ -55,24 +55,22 @@ class LoginFrom extends Component {
         return (
             <div className="Login">
                 <Form className="Login-Form" size="big">
-                    <h1 className="Form-title">
-                        <Link to="..">
-                            <Button circular icon='arrow left' color='black'/>
-                        </Link>Login to App
+                    <h1 className="Form-title">Login to App
                     </h1>
                     <Form.Field>
-                        <input onChange={this.handleChangename} placeholder='username'/>
+                        <input onChange={this.onUsernameChange} placeholder='username'/>
                     </Form.Field>
                     <Form.Field>
-                        <input type="password" onChange={this.handleChangepassword} placeholder='password'/>
+                        <input type="password" onChange={this.onPasswordChange} placeholder='password'/>
                     </Form.Field>
                     <div className="Action-group">
-                        <Button animated='fade' size='big' type='submit' positive className="Login-button" onClick={this.login}>
+                        <Button animated='fade' size='big' type='submit' positive className="Login-button"
+                                onClick={this.onLoginBtnClick}>
                             <Button.Content visible>Login</Button.Content>
                             <Button.Content hidden>Click</Button.Content>
                         </Button>
                         <Link to="../Register">
-                            <div className="GotoRegister-button">
+                            <div className="GoToRegister-button">
                                 Don't have account? Register!
                             </div>
                         </Link>

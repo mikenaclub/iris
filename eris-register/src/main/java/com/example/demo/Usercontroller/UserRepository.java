@@ -13,11 +13,14 @@ import java.util.List;
 @Repository
 public class UserRepository {
 
-    @Autowired
-    BCrypt bCrypt = new BCrypt();
+    private BCrypt bCrypt = new BCrypt();
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
 
     @Autowired
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    public UserRepository(BCrypt bCrypt, JdbcTemplate jdbcTemplate) {
+        this.bCrypt = bCrypt;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public List<UserModel> queryall() {
         List<UserModel> user = jdbcTemplate.query(
@@ -30,16 +33,17 @@ public class UserRepository {
 
     public boolean register(UserModel user) {
         try {
-            jdbcTemplate.update("INSERT INTO User (username,password) VALUE (?,?)",
+            jdbcTemplate.update("INSERT INTO user (username,password) VALUE (?,?)",
                     new Object[]{user.getUsername(), bCrypt.encode(user.getPassword())});
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
 
     public boolean login(UserModel user) {
-        UserModel datafromdatabase = (UserModel) jdbcTemplate.queryForObject("SELECT * FROM User WHERE username = ?"
+        UserModel datafromdatabase = (UserModel) jdbcTemplate.queryForObject("SELECT * FROM user WHERE username = ?"
                 , new Object[]{user.getUsername()}, (rs, rowNum) -> new UserModel(rs.getInt("id"),
                         rs.getString("username"), rs.getString("password")));
 
@@ -47,10 +51,7 @@ public class UserRepository {
         System.out.println(user.getPassword());
         System.out.println(bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword()));*/
         if (datafromdatabase != null) {
-            if (bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword()))
-                return true;
-            else
-                return false;
+            return bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword());
         } else
             return false;
 
