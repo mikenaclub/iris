@@ -12,15 +12,6 @@ const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
     : BrowserRouter;
 
-
-const Register = () => (
-    <div className="App-home">
-        <h1>Register</h1>
-        <p> in development. </p>
-        <Link to="..">back</Link>
-    </div>
-);
-
 const Home = () => (
     <div className="App-home">
         <Button.Group size='massive'>

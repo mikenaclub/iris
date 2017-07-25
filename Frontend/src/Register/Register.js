@@ -2,7 +2,7 @@
  * Created by STR02119 on 7/17/2017.
  */
 import React, {Component} from 'react';
-import {Button, Form} from 'semantic-ui-react'
+import {Button, Form} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import './Register.css'
 import $ from 'jquery';
@@ -13,7 +13,11 @@ class RegisterForm extends Component {
         this.state = {
             stateloading: false,
             stateusername: "",
-            statepassword: ""
+            statepassword: "",
+            repassword:"",
+            usernameerror: "",
+            passworderror: "",
+            repassworderror: ""
         };
     }
 
@@ -21,13 +25,19 @@ class RegisterForm extends Component {
         this.setState({
             stateusername: e.target.value
         })
+
+
     }
     handlepassword = (e) => {
         this.setState({
             statepassword: e.target.value
         })
     }
-
+    handlerepassword = (e) =>{
+        this.setState({
+            repassword: e.target.value
+        })
+    }
 
     handleClick = (e) => {
         this.setState({
@@ -59,23 +69,31 @@ class RegisterForm extends Component {
         return (
             <div className="Register">
 
-                <h1 className="title">Register</h1>
-                <Form loading={this.state.stateloading}>
-                    <Form.Field required>
-                        <label className="labelform">Username</label>
-                        <input type="text" placeholder="Username" value={this.state.stateusername}
+                <Form className="Register-Form" loading={this.state.stateloading}>
+                    <h1 className="Title">
+                        <Link to="..">
+                            <Button circular icon='arrow left' color='black'/>
+                        </Link>Register
+                    </h1>
+                    <Form.Field>
+                        <input placeholder="username" value={this.state.stateusername}
                                onChange={this.handleusername}/>
                     </Form.Field>
-                    <Form.Field required>
-                        <label className="labelform">Password</label>
-                        <input type="password" placeholder="Password" value={this.state.statepassword}
+                    <Form.Field>
+                        <input type="password" placeholder="password" value={this.state.statepassword}
                                onChange={this.handlepassword}/>
                     </Form.Field>
-                    <div className="groupbutton">
-                        <Link to='/'>
-                            <Button>Back</Button>
+                    <Form.Field>
+                        <input type="password" placeholder="repassword" value={this.state.repassword}
+                                onChange={this.handlerepassword}/>
+                    </Form.Field>
+                    <div className="Group-Button">
+                        <Button className="Register-button" size='big' onClick={this.handleClick} positive>Register</Button>
+                        <Link to="../Login">
+                            <div className="GotoLogin-button">
+                                or Login
+                            </div>
                         </Link>
-                        <Button onClick={this.handleClick}>OK</Button>
                     </div>
                 </Form>
             </div>
