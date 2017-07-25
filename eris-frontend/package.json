@@ -1,6 +1,6 @@
 {
-  "name": "Eris",
-  "version": "0.1.4",
+  "name": "eris",
+  "version": "0.2.1",
   "homepage": ".",
   "private": true,
   "dependencies": {

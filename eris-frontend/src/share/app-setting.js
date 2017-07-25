@@ -1,5 +1,5 @@
 const AppSetting = {
     "AppName": "Eris",
-    "AppVersion": "Pre-release 0.1.4"
+    "AppVersion": "Pre-release 0.2.1"
 };
 export default AppSetting;

@@ -5,8 +5,8 @@ import {Button} from 'semantic-ui-react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import FullHeader from './layout/Header-full';
 import Header from './layout/Header';
-import LoginFrom from './Login/Login';
-import RegisterForm from './Register/Register';
+import LoginFrom from './login/Login';
+import RegisterForm from './register/Register';
 
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter

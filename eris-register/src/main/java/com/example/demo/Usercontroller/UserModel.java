@@ -3,12 +3,12 @@ package com.example.demo.Usercontroller;
 /**
  * Created by STR02119 on 7/18/2017.
  */
-public class Usermodel {
+public class UserModel {
     int id;
     String username;
     String password;
 
-    public Usermodel(int id, String username, String password) {
+    public UserModel(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;

@@ -2,7 +2,7 @@
  * Created by STR02119 on 7/17/2017.
  */
 import React, {Component} from 'react';
-import {Button, Form} from 'semantic-ui-react';
+import {Button, Form} from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
 import './Register.css'
 import $ from 'jquery';
@@ -11,26 +11,20 @@ class RegisterForm extends Component {
     constructor() {
         super();
         this.state = {
-            stateloading: false,
-            stateusername: "",
-            statepassword: "",
-            repassword:"",
-            usernameerror: "",
-            passworderror: "",
-            repassworderror: ""
+            loading: false,
+            username: "",
+            password: ""
         };
     }
 
     handleusername = (e) => {
         this.setState({
-            stateusername: e.target.value
+            username: e.target.value
         })
-
-
     }
     handlepassword = (e) => {
         this.setState({
-            statepassword: e.target.value
+            password: e.target.value
         })
     }
     handlerepassword = (e) =>{
@@ -41,26 +35,26 @@ class RegisterForm extends Component {
 
     handleClick = (e) => {
         this.setState({
-            stateloading: true
+            loading: true
         });
-        let userinfo = {}
-        userinfo.username = this.state.stateusername
-        userinfo.password = this.state.statepassword
-        console.log(userinfo)
-        let userinfojson = JSON.stringify(userinfo)
-        console.log(userinfojson)
+        let userInfo = {}
+        userInfo.username = this.state.username
+        userInfo.password = this.state.password
+        console.log(userInfo)
+        let userInfoJson = JSON.stringify(userInfo)
+        console.log(userInfoJson)
         $.ajax({
-            url: "http://localhost:8080/api/registeruser",
+            url: "http://localhost:8080/registerApi/v1/user",
             type: "POST",
-            data: userinfojson,
+            data: userInfoJson,
             contentType: "application/json; charset=utf-8",
-            success: (respons) => {
-                console.log("Login Success")
-                this.setState({stateloading: false})
+            success: (response) => {
+                console.log("login Success")
+                this.setState({loading: false})
             },
-            error: (respons) => {
-                console.log(respons)
-                this.setState({stateloading: false})
+            error: (response) => {
+                console.log(response)
+                this.setState({loading: false})
             }
         })
     }
@@ -77,8 +71,16 @@ class RegisterForm extends Component {
                     </h1>
                     <Form.Field>
                         <input placeholder="username" value={this.state.stateusername}
+                <h1 className="title">Register</h1>
+                <Form loading={this.state.loading}>
+                    <Form.Field required>
+                        <label className="labelform">Username</label>
+                        <input type="text" placeholder="Username" value={this.state.username}
                                onChange={this.handleusername}/>
                     </Form.Field>
+                    <Form.Field required>
+                        <label className="labelform">Password</label>
+                        <input type="password" placeholder="Password" value={this.state.password}
                     <Form.Field>
                         <input type="password" placeholder="password" value={this.state.statepassword}
                                onChange={this.handlepassword}/>

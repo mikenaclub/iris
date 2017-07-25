@@ -1,9 +1,7 @@
 package com.example.demo.Usercontroller;
 
 import com.example.demo.HashingPassword.BCrypt;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +11,7 @@ import java.util.List;
  * Created by STR02119 on 7/18/2017.
  */
 @Repository
-public class Userrepository {
+public class UserRepository {
 
     @Autowired
     BCrypt bCrypt = new BCrypt();
@@ -21,16 +19,16 @@ public class Userrepository {
     @Autowired
     private JdbcTemplate jdbcTemplate = new JdbcTemplate();
 
-    public List<Usermodel> queryall() {
-        List<Usermodel> user = jdbcTemplate.query(
+    public List<UserModel> queryall() {
+        List<UserModel> user = jdbcTemplate.query(
                 "SELECT id,username,password FROM User",
-                (rs, rowNum) -> (new Usermodel(rs.getInt("id"),
+                (rs, rowNum) -> (new UserModel(rs.getInt("id"),
                         rs.getString("username"), rs.getString("password")))
         );
         return user;
     }
 
-    public boolean register(Usermodel user) {
+    public boolean register(UserModel user) {
         try {
             jdbcTemplate.update("INSERT INTO User (username,password) VALUE (?,?)",
                     new Object[]{user.getUsername(), bCrypt.encode(user.getPassword())});
@@ -40,9 +38,9 @@ public class Userrepository {
         }
     }
 
-    public boolean login(Usermodel user) {
-        Usermodel datafromdatabase = (Usermodel) jdbcTemplate.queryForObject("SELECT * FROM User WHERE username = ?"
-                , new Object[]{user.getUsername()}, (rs, rowNum) -> new Usermodel(rs.getInt("id"),
+    public boolean login(UserModel user) {
+        UserModel datafromdatabase = (UserModel) jdbcTemplate.queryForObject("SELECT * FROM User WHERE username = ?"
+                , new Object[]{user.getUsername()}, (rs, rowNum) -> new UserModel(rs.getInt("id"),
                         rs.getString("username"), rs.getString("password")));
 
         /*System.out.println(datafromdatabase.getPassword());
