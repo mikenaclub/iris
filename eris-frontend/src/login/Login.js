@@ -3,10 +3,12 @@
  */
 import React, {Component} from 'react';
 import {Button, Form} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
 import './Login.css';
-import $ from 'jquery';
+import {loginConnectionString} from '../share/app-connection'
+import axios from 'axios';
+import UserDetail from '../share/UserDetail'
 
 class LoginFrom extends Component {
     constructor() {
@@ -14,7 +16,8 @@ class LoginFrom extends Component {
         this.state = {
             username: "",
             password: "",
-            show: false
+            show: false,
+            isAuthenticated: UserDetail.getInstance().isAuthenticated()
         }
     }
 
@@ -38,31 +41,25 @@ class LoginFrom extends Component {
     }
 
     onLoginBtnClick = () => {
-        /*fetch('http://localhost:8092/login/query', {
-            method: 'GET'
-        }).then((response) => console.log(response));*/
-
-        let userInfo = {}
-        userInfo.username = this.state.username
-        userInfo.password = this.state.password
-        console.log(userInfo)
-        let userInfoJson = JSON.stringify(userInfo)
-        console.log(userInfoJson)
-        $.ajax({
-            url: "http://localhost:8091/onLoginBtnClick/onLoginBtnClick",
-            type: "post",
-            data: userInfoJson,
-            contentType: "application/json; charset=utf-8",
-            success: (response) => {
-                console.log(response)
-            },
-            error: (response) => {
-                console.log(response)
-            }
-        })
+        axios.post(loginConnectionString, {
+            username: this.state.username,
+            password: this.state.password
+        }).then((res) => {
+            UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
+            this.setState({isAuthenticated: true});
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     render() {
+
+        if (this.state.isAuthenticated) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
         return (
             <div className="Login">
                 <CSSTransition

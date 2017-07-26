@@ -5,22 +5,38 @@ import Homepage from './homepage/Homepage';
 import LoginFrom from './login/Login';
 import RegisterForm from './register/Register';
 import Header from './layout/header/Header';
+import MainPage from './main/MainPage';
+import UserRepository from './share/UserDetail';
 
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
     : BrowserRouter;
 
-const AppDetail = () => (
-    <Route render={({history: {location}}) =>
-        <div className="App-detail">
-            <Switch>
-                <Route exact path="/" component={Homepage}/>
-                <Route exact path="/login" component={LoginFrom}/>
-                <Route exact path="/register" component={RegisterForm}/>
-            </Switch>
-        </div>
-    }/>
-)
+
+class AppDetail extends Component {
+
+
+    render() {
+        let detail = null;
+        if (UserRepository.getInstance().isAuthenticated()) {
+            detail = <MainPage/>;
+        }
+        else {
+            detail =
+                <Switch>
+                    <Route exact path="/" component={Homepage}/>
+                    <Route exact path="/login" component={LoginFrom}/>
+                    <Route exact path="/register" component={RegisterForm}/>
+                </Switch>;
+        }
+
+        return (
+            <div className="App-detail">
+                {detail}
+            </div>
+        )
+    }
+}
 
 class App extends Component {
     constructor(...args) {
