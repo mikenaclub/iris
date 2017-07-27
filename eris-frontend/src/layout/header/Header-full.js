@@ -2,12 +2,12 @@
  * Created by neetc on 7/15/2017.
  */
 import React, {Component} from 'react';
-import logo from '../logo.svg';
+import logo from '../../logo.svg';
 import './Header-full.css'
 import {CSSTransition} from 'react-transition-group';
-import AppSetting from '../share/app-setting';
+import AppSetting from '../../share/app-setting';
 import {Dropdown, Button} from 'semantic-ui-react';
-import AppLanguage from '../share/app-langauge'
+import AppLanguage from '../../share/app-langauge'
 
 class FullHeader extends Component {
     constructor(...args) {

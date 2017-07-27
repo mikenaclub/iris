@@ -2,14 +2,15 @@
  * Created by neetc on 7/15/2017.
  */
 import React, {Component} from 'react';
-import logo from '../logo.svg';
-import './Header.css'
+import {Link} from 'react-router-dom';
+import logo from '../../logo.svg';
+import './Header-small.css'
 import {CSSTransition} from 'react-transition-group';
-import AppSetting from '../share/app-setting';
+import AppSetting from '../../share/app-setting';
 import {Button, Dropdown} from 'semantic-ui-react';
-import AppLanguage from '../share/app-langauge'
+import AppLanguage from '../../share/app-langauge'
 
-class Header extends Component {
+class SmallHeader extends Component {
     constructor(...args) {
         super(...args);
         this.state = {show: false}
@@ -34,9 +35,8 @@ class Header extends Component {
                     unmountOnExit={true}
                 >
                     <div className="App-header">
-                        <img src={logo} className="App-logo-small" alt="logo"/>
-                        <div> {AppSetting.AppName} - {AppSetting.AppVersion} </div>
-                        &nbsp;&nbsp;
+                        <Link to="/"><img src={logo} className="App-logo-small" alt="logo"/></Link>
+                        <div className="App-title"> {AppSetting.AppName} - {AppSetting.AppVersion} </div>
 
                         <Button.Group size="small" color='blue'>
                             <Dropdown floating button options={AppLanguage}
@@ -49,4 +49,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default SmallHeader;

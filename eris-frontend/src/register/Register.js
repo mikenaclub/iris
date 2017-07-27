@@ -3,10 +3,12 @@
  */
 import React, {Component} from 'react';
 import {Button, Form} from 'semantic-ui-react'
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './Register.css'
-import $ from 'jquery';
 import {registerConnetionString} from '../share/app-connection';
+import {CSSTransition} from 'react-transition-group';
+import UserDetail from "../share/UserDetail";
+import axios from 'axios';
 
 class RegisterForm extends Component {
     constructor() {
@@ -15,8 +17,18 @@ class RegisterForm extends Component {
             loading: false,
             username: "",
             password: "",
-            reEnterPassword: ""
+            reEnterPassword: "",
+            show: false,
+            isAuthenticated: UserDetail.getInstance().isAuthenticated()
         };
+    }
+
+    componentDidMount() {
+        this.setState({show: true})
+    }
+
+    componentWillUnmount() {
+        this.setState({show: false})
     }
 
     onUsernameChange = (e) => {
@@ -39,55 +51,63 @@ class RegisterForm extends Component {
         this.setState({
             loading: true
         });
-        let userInfo = {}
-        userInfo.username = this.state.username
-        userInfo.password = this.state.password
-        console.log(userInfo)
-        let userInfoJson = JSON.stringify(userInfo)
-        console.log(userInfoJson)
-        $.ajax({
-            url: registerConnetionString,
-            type: "POST",
-            data: userInfoJson,
-            contentType: "application/json; charset=utf-8",
-            success: (response) => {
-                this.setState({loading: false})
-            },
-            error: (response) => {
-                this.setState({loading: false})
-            }
-        })
+        axios.post(registerConnetionString, {
+            username: this.state.username,
+            password: this.state.password
+        }).then((response) => {
+            UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
+            this.setState({
+                loading: false,
+                isAuthenticated: true
+            })
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     render() {
+        if (this.state.isAuthenticated) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
         return (
             <div className="Register">
 
-                <Form className="Register-Form" loading={this.state.loading} size="big">
-                    <h1 className="Title">Register
-                    </h1>
-                    <Form.Field>
-                        <input type="text" placeholder="Username" value={this.state.username}
-                               onChange={this.onUsernameChange}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <input type="password" placeholder="password" value={this.state.password}
-                               onChange={this.onPasswordChange}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <input type="password" placeholder="repassword" value={this.state.reEnterPassword}
-                               onChange={this.onReEnterPasswordChange}/>
-                    </Form.Field>
-                    <div className="Group-Button">
-                        <Button className="Register-button" size='big' onClick={this.handleClick}
-                                positive>Register</Button>
-                        <Link to="../Login">
-                            <div className="GotoLogin-button">
-                                already have account? Log in!
-                            </div>
-                        </Link>
-                    </div>
-                </Form>
+                <CSSTransition
+                    timeout={300}
+                    classNames="fade"
+                    in={this.state.show}
+                    mountOnEnter={true}
+                    unmountOnExit={true}
+                >
+                    <Form className="Register-Form" loading={this.state.loading} size="big">
+                        <h1 className="Title">Register
+                        </h1>
+                        <Form.Field>
+                            <input type="text" placeholder="Username" value={this.state.username}
+                                   onChange={this.onUsernameChange}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <input type="password" placeholder="password" value={this.state.password}
+                                   onChange={this.onPasswordChange}/>
+                        </Form.Field>
+                        <Form.Field>
+                            <input type="password" placeholder="repassword" value={this.state.reEnterPassword}
+                                   onChange={this.onReEnterPasswordChange}/>
+                        </Form.Field>
+                        <div className="Group-Button">
+                            <Button className="Register-button" size='big' onClick={this.handleClick}
+                                    positive>Register</Button>
+                            <Link to="../login">
+                                <div className="GotoLogin-button">
+                                    already have account? Log in!
+                                </div>
+                            </Link>
+                        </div>
+                    </Form>
+                </CSSTransition>
             </div>
         )
     }

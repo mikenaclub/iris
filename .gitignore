@@ -31,3 +31,4 @@ eris-frontend/build/
 eris-register/src/test/test.iml
 eris-register/src/main/main.iml
 eris-register/demo.iml
+eris-login/node_modules/
