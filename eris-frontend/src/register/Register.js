@@ -3,11 +3,12 @@
  */
 import React, {Component} from 'react';
 import {Button, Form} from 'semantic-ui-react'
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './Register.css'
-import $ from 'jquery';
 import {registerConnetionString} from '../share/app-connection';
 import {CSSTransition} from 'react-transition-group';
+import UserDetail from "../share/UserDetail";
+import axios from 'axios';
 
 class RegisterForm extends Component {
     constructor() {
@@ -17,7 +18,8 @@ class RegisterForm extends Component {
             username: "",
             password: "",
             reEnterPassword: "",
-            show: false
+            show: false,
+            isAuthenticated: UserDetail.getInstance().isAuthenticated()
         };
     }
 
@@ -49,27 +51,27 @@ class RegisterForm extends Component {
         this.setState({
             loading: true
         });
-        let userInfo = {}
-        userInfo.username = this.state.username
-        userInfo.password = this.state.password
-        console.log(userInfo)
-        let userInfoJson = JSON.stringify(userInfo)
-        console.log(userInfoJson)
-        $.ajax({
-            url: registerConnetionString,
-            type: "POST",
-            data: userInfoJson,
-            contentType: "application/json; charset=utf-8",
-            success: (response) => {
-                this.setState({loading: false})
-            },
-            error: (response) => {
-                this.setState({loading: false})
-            }
-        })
+        axios.post(registerConnetionString, {
+            username: this.state.username,
+            password: this.state.password
+        }).then((response) => {
+            UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
+            this.setState({
+                loading: false,
+                isAuthenticated: true
+            })
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
     render() {
+        if (this.state.isAuthenticated) {
+            return (
+                <Redirect to="/"/>
+            )
+        }
+
         return (
             <div className="Register">
 

@@ -22,7 +22,7 @@ router.post('/login', (req, res, next) => {
     console.log(password);
     connectdata.query('SELECT * FROM user Where username = ?', [username], (err, rows, fields) => {
         if (err) throw err;
-        if (rows[0] != null) {
+        if (rows[0] !== null) {
             bcrypt.compare(password, rows[0].password, function (err, result) {
                 if (result)
                     res.status(202).send("login success");

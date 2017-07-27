@@ -6,7 +6,7 @@ import LoginFrom from './login/Login';
 import RegisterForm from './register/Register';
 import Header from './layout/header/Header';
 import MainPage from './main/MainPage';
-import UserRepository from './share/UserDetail';
+import UserDetail from './share/UserDetail';
 
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
@@ -14,11 +14,9 @@ const AppRouter = window.matchMedia('(display-mode: standalone)').matches
 
 
 class AppDetail extends Component {
-
-
     render() {
         let detail = null;
-        if (UserRepository.getInstance().isAuthenticated()) {
+        if (UserDetail.getInstance().isAuthenticated()) {
             detail = <MainPage/>;
         }
         else {
