@@ -7,6 +7,7 @@ import RegisterForm from './register/Register';
 import Header from './layout/header/Header';
 import MainPage from './main/MainPage';
 import UserDetail from './share/UserDetail';
+import Sidebar from './layout/sidebar/Sidebar';
 
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
@@ -17,7 +18,9 @@ class AppDetail extends Component {
     render() {
         let detail = null;
         if (UserDetail.getInstance().isAuthenticated()) {
-            detail = <MainPage/>;
+            detail =
+                <MainPage/>;
+
         }
         else {
             detail =

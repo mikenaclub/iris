@@ -1,0 +1,8 @@
+.Sidebar {
+    max-width: 300px;
+    background-color: black;
+    min-height: 100vh;
+    padding-top: 16px;
+    padding-right: 16px;
+    flex: 1;
+}
