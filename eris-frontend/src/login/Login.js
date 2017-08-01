@@ -48,7 +48,7 @@ class LoginFrom extends Component {
             UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
             this.setState({isAuthenticated: true});
         }).catch((error) => {
-            console.log(error)
+            console.log(error.response)
         });
     }
 

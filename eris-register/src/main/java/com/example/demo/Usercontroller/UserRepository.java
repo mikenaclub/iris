@@ -43,17 +43,25 @@ public class UserRepository {
     }
 
     public boolean login(UserModel user) {
-        UserModel datafromdatabase = (UserModel) jdbcTemplate.queryForObject("SELECT * FROM user WHERE username = ?"
-                , new Object[]{user.getUsername()}, (rs, rowNum) -> new UserModel(rs.getInt("id"),
-                        rs.getString("username"), rs.getString("password")));
-
+        try {
+            UserModel datafromdatabase = (UserModel) jdbcTemplate.queryForObject("SELECT * FROM user WHERE username = ?"
+                    , new Object[]{user.getUsername()}, (rs, rowNum) -> new UserModel(rs.getInt("id"),
+                            rs.getString("username"), rs.getString("password")));
+            if (datafromdatabase != null) {
+                return bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword());
+            } else
+                return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
         /*System.out.println(datafromdatabase.getPassword());
         System.out.println(user.getPassword());
         System.out.println(bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword()));*/
-        if (datafromdatabase != null) {
+        /*if (datafromdatabase != null) {
             return bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword());
         } else
-            return false;
+            return false;*/
 
     }
 }
