@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import UserDetail from '../share/UserDetail';
+import Chat from "../chat/chat";
 
 class MainPage extends Component {
     constructor() {
@@ -25,6 +26,7 @@ class MainPage extends Component {
             <div>
                 Login!
                 <button onClick={this.logout}>logout</button>
+                <Chat/>
             </div>
         );
     }
