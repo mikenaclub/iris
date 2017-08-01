@@ -2,7 +2,7 @@
  * Created by STR02119 on 7/17/2017.
  */
 import React, {Component} from 'react';
-import {Button, Form ,Modal,Header} from 'semantic-ui-react'
+import {Button, Form, Modal, Header} from 'semantic-ui-react'
 import {Link, Redirect} from 'react-router-dom';
 import './Register.css'
 import {registerConnetionString} from '../share/app-connection';
@@ -53,27 +53,27 @@ class RegisterForm extends Component {
         this.setState({
             loading: true
         });
-        if (this.state.username == "" || this.state.password == "" || this.state.reEnterPassword == ""){
+        if (this.state.username === "" || this.state.password === "" || this.state.reEnterPassword === "") {
             console.log("Please use full field")
             this.setState({
                 showerror: true,
-                errormessage:"Please use full field"
+                errormessage: "Please use full field"
             });
             this.setState({
                 loading: false
             })
         }
-        else if(this.state.password !== this.state.reEnterPassword){
+        else if (this.state.password !== this.state.reEnterPassword) {
             console.log("password != repassword")
             this.setState({
                 showerror: true,
-                errormessage:"Repassword is incorrect !"
+                errormessage: "Repassword is incorrect !"
             });
             this.setState({
                 loading: false
             })
         }
-        else{
+        else {
             axios.post(registerConnetionString, {
                 username: this.state.username,
                 password: this.state.password
@@ -95,7 +95,7 @@ class RegisterForm extends Component {
 
     }
 
-    clickShowError  = (e) => {
+    clickShowError = (e) => {
         this.setState({
             showerror: false
         })
@@ -146,7 +146,7 @@ class RegisterForm extends Component {
                         <Modal
                             open={this.state.showerror}
                         >
-                            <Header content='Register Fail !!!' />
+                            <Header content='Register Fail !!!'/>
                             <Modal.Content>
                                 <p>{this.state.errormessage}</p>
                             </Modal.Content>

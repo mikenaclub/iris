@@ -2,7 +2,15 @@
     max-width: 300px;
     background-color: black;
     min-height: 100vh;
-    padding-top: 16px;
-    padding-right: 16px;
     flex: 1;
+}
+
+.Sidebar .UserInfo {
+    color: white;
+    background-color: #0d71bb;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -2,7 +2,7 @@
  * Created by neetc on 7/15/2017.
  */
 import React, {Component} from 'react';
-import {Button, Form,Modal,Header} from 'semantic-ui-react';
+import {Button, Form, Modal, Header} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
 import './Login.css';
@@ -47,6 +47,7 @@ class LoginFrom extends Component {
             username: this.state.username,
             password: this.state.password
         }).then((res) => {
+            console.log(this.state.username);
             UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
             this.setState({isAuthenticated: true});
         }).catch((error) => {
@@ -54,11 +55,12 @@ class LoginFrom extends Component {
             this.setState({showerror: true});
         });
     }
-    clickShowError  = (e) => {
+    clickShowError = (e) => {
         this.setState({
             showerror: false
         })
     }
+
     render() {
 
         if (this.state.isAuthenticated) {
@@ -101,7 +103,7 @@ class LoginFrom extends Component {
                         <Modal
                             open={this.state.showerror}
                         >
-                            <Header content='Login Fail !!!' />
+                            <Header content='Login Fail !!!'/>
                             <Modal.Content>
                                 <p>Please try again later.</p>
                             </Modal.Content>
