@@ -7,7 +7,6 @@ import RegisterForm from './register/Register';
 import Header from './layout/header/Header';
 import MainPage from './main/MainPage';
 import UserDetail from './share/UserDetail';
-
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
     : BrowserRouter;

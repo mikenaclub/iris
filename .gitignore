@@ -32,3 +32,4 @@ eris-register/src/test/test.iml
 eris-register/src/main/main.iml
 eris-register/demo.iml
 eris-login/node_modules/
+eris-chat/node_modules/

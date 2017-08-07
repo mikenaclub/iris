@@ -13,7 +13,8 @@
     "react-scripts": "1.0.10",
     "react-transition-group": "^2.0.2",
     "semantic-ui-css": "^2.2.11",
-    "semantic-ui-react": "^0.71.0"
+    "semantic-ui-react": "^0.71.0",
+    "socket.io": "^2.0.3"
   },
   "scripts": {
     "predeploy": "npm run build",

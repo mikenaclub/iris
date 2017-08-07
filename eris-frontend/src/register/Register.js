@@ -61,6 +61,7 @@ class RegisterForm extends Component {
                 isAuthenticated: true
             })
         }).catch((error) => {
+
             console.log(error);
         });
     }
