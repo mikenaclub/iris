@@ -2,13 +2,14 @@
  * Created by neetc on 7/15/2017.
  */
 import React, {Component} from 'react';
-import {Button, Form} from 'semantic-ui-react';
+import {Button, Form, Modal, Header} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
 import './Login.css';
 import {loginConnectionString} from '../share/app-connection'
 import axios from 'axios';
 import UserDetail from '../share/UserDetail'
+
 
 class LoginFrom extends Component {
     constructor() {
@@ -17,7 +18,8 @@ class LoginFrom extends Component {
             username: "",
             password: "",
             show: false,
-            isAuthenticated: UserDetail.getInstance().isAuthenticated()
+            isAuthenticated: UserDetail.getInstance().isAuthenticated(),
+            showerror: false
         }
     }
 
@@ -45,11 +47,18 @@ class LoginFrom extends Component {
             username: this.state.username,
             password: this.state.password
         }).then((res) => {
+            console.log(this.state.username);
             UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
             this.setState({isAuthenticated: true});
         }).catch((error) => {
             console.log(error.response)
+            this.setState({showerror: true});
         });
+    }
+    clickShowError = (e) => {
+        this.setState({
+            showerror: false
+        })
     }
 
     render() {
@@ -90,6 +99,20 @@ class LoginFrom extends Component {
                                 </div>
                             </Link>
                         </div>
+
+                        <Modal
+                            open={this.state.showerror}
+                        >
+                            <Header content='Login Fail !!!'/>
+                            <Modal.Content>
+                                <p>Please try again later.</p>
+                            </Modal.Content>
+                            <Modal.Actions>
+                                <Button color='green' inverted onClick={this.clickShowError}>Yes
+                                </Button>
+                            </Modal.Actions>
+                        </Modal>
+
                     </Form>
                 </CSSTransition>
             </div>
