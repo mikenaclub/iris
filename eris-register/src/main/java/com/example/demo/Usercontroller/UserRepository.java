@@ -24,7 +24,7 @@ public class UserRepository {
 
     public List<UserModel> queryall() {
         List<UserModel> user = jdbcTemplate.query(
-                "SELECT id,username,password FROM User",
+                "SELECT id,username,password FROM user",
                 (rs, rowNum) -> (new UserModel(rs.getInt("id"),
                         rs.getString("username"), rs.getString("password")))
         );
