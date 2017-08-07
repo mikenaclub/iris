@@ -16,7 +16,9 @@ class AppDetail extends Component {
     render() {
         let detail = null;
         if (UserDetail.getInstance().isAuthenticated()) {
-            detail = <MainPage/>;
+            detail =
+                <MainPage/>;
+
         }
         else {
             detail =

@@ -9,7 +9,7 @@ class UserDetail {
             userRepository = new UserDetail(null);
         }
         else {
-            let user = localStorage.getItem('user');
+            let user = JSON.parse(localStorage.getItem('user'));
             userRepository = new UserDetail(user.username);
         }
         return userRepository;
@@ -25,6 +25,7 @@ UserDetail.prototype.setUserInfo = function (user) {
 }
 UserDetail.prototype.setToLocalStorage = function () {
     localStorage.setItem('user', JSON.stringify(this));
+    console.log(localStorage.getItem('user'));
 }
 UserDetail.prototype.removeFromStorage = function () {
     localStorage.removeItem('user');
