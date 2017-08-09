@@ -27,8 +27,6 @@ class MainPage extends Component {
         return (
             <div className="MainPage">
                 <Sidebar/>
-                Login!
-                <button onClick={this.logout}>logout</button>
                 <Chat/>
             </div>
         );
