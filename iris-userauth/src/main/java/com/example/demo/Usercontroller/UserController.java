@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by STR02119 on 7/18/2017.
  */
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "https://iris.echoneet.space")
 @RestController
 @RequestMapping("/v1/")
 public class UserController {
