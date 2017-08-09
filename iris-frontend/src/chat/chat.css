@@ -1,12 +1,40 @@
 .Chat {
-    margin: auto;
-    height: 100%;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50vw;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    flex: 2;
+    padding: 16px;
 }
 
-.message-Form {
+.Input-Submit {
+    visibility: hidden;
+}
+
+.Mymessage {
+    margin-right: 5px !important;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Message-Form {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Input-Message {
+    width: 100%;
+}
+
+.Field-Message{
+    width: 100%;
+    max-height: 80vh;
+    overflow: auto;
+}
+.Field-Message .ui.comments{
+    max-width: 100% !important;
 }

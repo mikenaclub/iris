@@ -13,14 +13,14 @@ io.on('connection', function(socket){
     let useridentidy;
     socket.on('userconnect', function (user) {
         useridentidy = user;
-        console.log(user+' : connected');
+        console.log('Status -> user : '+user+' connected !!!');
     })
     socket.on('chat message', function(msg){
-        console.log(msg)
+        console.log(msg.user+' : '+msg.message)
         io.emit('chat message', msg);
     });
     socket.on('disconnect', function(){
-        console.log(useridentidy+' : disconnected');
+        console.log('Status -> user : '+useridentidy+' disconnected !!!');
     });
 });
 

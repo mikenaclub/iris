@@ -2,6 +2,7 @@
     max-width: 300px;
     background-color: black;
     min-height: 100vh;
+    height: 100%;
     flex: 1;
 }
 
@@ -12,5 +13,11 @@
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.RoomList{
+    margin-top: 16px;
+    margin-right: 10px;
 }
