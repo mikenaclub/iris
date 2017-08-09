@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, Comment, Icon, Input } from 'semantic-ui-react';
+import { Form, Comment, Icon, Input } from 'semantic-ui-react';
 import './chat.css';
 import io from 'socket.io-client'
 import UserDetail from '../share/UserDetail'
@@ -30,6 +30,11 @@ class Chat extends Component {
             }));
             console.log("All message : "+ this.state.messages)
             console.log(msg);
+
+            //scroll down show new message in Field message
+            var objDiv = document.getElementById("fieldmessage");
+            objDiv.scrollTop = objDiv.scrollHeight;
+
         }.bind(this))
 
     }
@@ -57,24 +62,31 @@ class Chat extends Component {
         })
     }
 
+    checksendmessage = (e) => {
+        if(e.key === "Enter"){
+            this.submit();
+        }
+    }
     render(){
         var messages = this.state.messages;
         var messagesDiv = [];
         var position = "";
         var avatar = "";
+        //show message on field message
         for (var i = 0; i < messages.length; i++) {
-
+            //if my message
             if (messages[i].user === this.state.username){
-                position = "mymessage";
+                position = "Mymessage";
                 avatar = "";
             }
+            //if other message
             else {
                 position = "";
                 avatar = <Comment.Avatar as='a' src='https://react.semantic-ui.com/assets/images/avatar/small/matt.jpg' />
             }
 
             messagesDiv.push(
-                <Comment className={position} key={i}>
+                <Comment key={i}>
                     {avatar}
                     <Comment.Content>
                         <Comment.Author  as='a' className={position}>{messages[i].user}</Comment.Author>
@@ -85,16 +97,18 @@ class Chat extends Component {
         }
         return (
             <div className="Chat">
-                <Form className="message-Form">
+                <div id="fieldmessage" className="Field-Message">
                     <Comment.Group minimal>
                         {messagesDiv}
                     </Comment.Group>
+                </div>
+                <Form className="Message-Form">
                     {/*<input placeholder="message" onChange={this.changemessage} value={this.state.message}/><Button onClick={this.submit}>Send</Button>*/}
                     <Input
-                        className="message-Form" icon={<Icon name='send' onClick={this.submit} inverted circular link />}
+                        onKeyUp={this.checksendmessage}
+                        className="Input-Message" icon={<Icon name='send' onClick={this.submit} inverted circular link />}
                         placeholder='message' onChange={this.changemessage} value={this.state.message}
                     />
-                    <Button className="input-Submit" onClick={this.submit}>Send</Button>
                 </Form>
             </div>
 
