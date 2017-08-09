@@ -40,3 +40,4 @@ iris-userauth/iris-userAuth.iml
 iris-frontend/node_modules/
 iris-register/target/
 iris-register/demo.iml
+iris-chat/node_modules/
