@@ -13,7 +13,7 @@ import java.util.List;
  */
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/registerApi/v1/")
+@RequestMapping("/userAuthApi/v1/")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -25,7 +25,7 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public List<UserModel> queryall() {
-        List<UserModel> user = userRepository.queryall();
+        List<UserModel> user = userRepository.queryAll();
         return user;
     }
 
@@ -41,10 +41,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User duplicate");
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> Login(@RequestBody String userInfo) {
-        System.out.println("Login!!!");
-        System.out.println(userInfo);
         Gson gson = new Gson();
         UserModel user = gson.fromJson(userInfo, UserModel.class);
         boolean result = userRepository.login(user);
