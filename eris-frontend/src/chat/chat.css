@@ -7,6 +7,15 @@
     width: 50vw;
 }
 
+.input-Submit {
+    visibility: hidden;
+}
+
+.mymessage {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .message-Form {
     width: 100%;
 }

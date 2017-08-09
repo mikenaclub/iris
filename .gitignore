@@ -33,3 +33,5 @@ eris-register/src/main/main.iml
 eris-register/demo.iml
 eris-login/node_modules/
 eris-chat/node_modules/
+eris-register/classes/artifacts/demo_jar/demo.jar
+eris-register/src/main/java/META-INF/MANIFEST.MF
