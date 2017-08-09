@@ -25,7 +25,6 @@ UserDetail.prototype.setUserInfo = function (user) {
 }
 UserDetail.prototype.setToLocalStorage = function () {
     localStorage.setItem('user', JSON.stringify(this));
-    console.log(localStorage.getItem('user'));
 }
 UserDetail.prototype.removeFromStorage = function () {
     localStorage.removeItem('user');
