@@ -13,7 +13,7 @@ import java.util.List;
  */
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/userAuthApi/v1/")
+@RequestMapping("/v1/")
 public class UserController {
 
     private final UserRepository userRepository;
