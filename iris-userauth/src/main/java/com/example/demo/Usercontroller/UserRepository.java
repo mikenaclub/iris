@@ -22,7 +22,7 @@ public class UserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<UserModel> queryall() {
+    public List<UserModel> queryAll() {
         List<UserModel> user = jdbcTemplate.query(
                 "SELECT id,username,password FROM user",
                 (rs, rowNum) -> (new UserModel(rs.getInt("id"),
@@ -34,7 +34,7 @@ public class UserRepository {
     public boolean register(UserModel user) {
         try {
             jdbcTemplate.update("INSERT INTO user (username,password) VALUE (?,?)",
-                    new Object[]{user.getUsername(), bCrypt.encode(user.getPassword())});
+                    user.getUsername(), bCrypt.encode(user.getPassword()));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,11 +44,11 @@ public class UserRepository {
 
     public boolean login(UserModel user) {
         try {
-            UserModel datafromdatabase = (UserModel) jdbcTemplate.queryForObject("SELECT * FROM user WHERE username = ?"
+            UserModel dataFromDatabase = jdbcTemplate.queryForObject("SELECT * FROM user WHERE username = ?"
                     , new Object[]{user.getUsername()}, (rs, rowNum) -> new UserModel(rs.getInt("id"),
                             rs.getString("username"), rs.getString("password")));
-            if (datafromdatabase != null) {
-                return bCrypt.matchpass(user.getPassword(), datafromdatabase.getPassword());
+            if (dataFromDatabase != null) {
+                return bCrypt.matchpass(user.getPassword(), dataFromDatabase.getPassword());
             } else
                 return false;
         } catch (Exception e) {

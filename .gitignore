@@ -33,5 +33,11 @@ eris-register/src/main/main.iml
 eris-register/demo.iml
 eris-login/node_modules/
 eris-chat/node_modules/
+eris-register/classes/artifacts/demo_jar/demo.jar
+eris-register/src/main/java/META-INF/MANIFEST.MF
 iris-userauth/target/
 iris-userauth/iris-userAuth.iml
+iris-frontend/node_modules/
+iris-register/target/
+iris-register/demo.iml
+iris-chat/node_modules/

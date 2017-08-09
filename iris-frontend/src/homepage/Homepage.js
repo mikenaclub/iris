@@ -29,7 +29,7 @@ class homepage extends Component {
                 >
                     <Button.Group size='massive'>
                         <Link to="/login"><Button positive>Login</Button></Link>
-                        <Link to="/chatroom"><Button.Or text='or'/></Link>
+                        <Button.Or text='or'/>
                         <Link to="/register"><Button secondary>Register</Button></Link>
                     </Button.Group>
                 </CSSTransition>
