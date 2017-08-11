@@ -3,13 +3,13 @@ import { Form, Comment, Icon, Input } from 'semantic-ui-react';
 import './chat.css';
 import io from 'socket.io-client'
 import UserDetail from '../share/UserDetail'
-import chatConnectionString from '../share/app-connection';
+import {chatConnectionString} from '../share/app-connection';
 
 class Chat extends Component {
     constructor() {
         super();
         this.state = {
-            socket : io(chatConnectionString),
+            socket : io(chatConnectionString.URL,chatConnectionString.path),
             show: false,
             message: "",
             messages: [],
