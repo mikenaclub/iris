@@ -3,7 +3,8 @@
  */
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http, {path : '/textChatApi/socket.io'});
+console.log(http);
+var io = require('socket.io')('https://iris.echoneet.space', {path : '/textChatApi/socket.io'});
 var PORT = "8093"
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
