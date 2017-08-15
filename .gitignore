@@ -26,3 +26,8 @@ Frontend/node_modules/
 Frontend/build/
 .netlify
 public/_redirects
+iris-chat/node_modules/
+iris-frontend/build/
+iris-frontend/node_modules/
+iris-userauth/target/
+iris-userauth/iris-userAuth.iml
