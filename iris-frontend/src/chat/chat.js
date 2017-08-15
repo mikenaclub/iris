@@ -37,13 +37,19 @@ class Chat extends Component {
         }.bind(this))
 
         //alert message in message filed when user join room
-        this.state.socket.on('msg alert',function (msg) {
+        this.state.socket.on('alert changeroom',function (msg,msg2) {
+            console.log(msg2)
+            this.setState({
+                messages : [],
+                room: msg.room
+            })
+
+            //collect old message
             var allmessages = this.state.messages;
-            this.setState((previousState) => ({
-                messages: allmessages.concat(msg),
-            }));
-            //console.log("All message : "+ this.state.messages)
-            console.log(msg);
+            this.setState({
+                messages: allmessages.concat(msg,msg2),
+            });
+
             //scroll down show new message in Field message
             var objDiv = document.getElementById("fieldmessage");
             objDiv.scrollTop = objDiv.scrollHeight;
@@ -54,8 +60,11 @@ class Chat extends Component {
         this.setState({show: false})
     }
 
-    submit = () => {
-        if (this.state.message !==""){
+    //
+
+
+    sendMessage = () => {
+        if (this.state.message !=="" && this.state.room !== ""){
             //send message to server
             var message = '{"user":"'+this.state.username+'","message":"'+this.state.message+'"}';
             var jsonmessage = JSON.parse(message);
@@ -64,26 +73,29 @@ class Chat extends Component {
                 message:""
             })
         }
+        this.setState({
+            message:""
+        })
+
     }
 
-    changemessage = (e) => {
+    changeMessage = (e) => {
         this.setState({
             message: e.target.value
         })
     }
 
-    checksendmessage = (e) => {
+    checkKeySendMessage = (e) => {
         if(e.key === "Enter"){
-            this.submit();
+            this.sendMessage();
         }
     }
 
     changeRoom = (e) => {
         console.log(e.target.value)
-        this.setState({
-            room: e.target.value,
+        /*this.setState({
             messages : []
-        })
+        })*/
         this.state.socket.emit("changeroom",e.target.value)
     }
 
@@ -119,9 +131,13 @@ class Chat extends Component {
             <div className="Chat">
                 <div>
                     <Button onClick={this.changeRoom} value="room1" >Room1</Button>
+                    {/*<Button size='mini'>Channel1</Button>
+                    <Button size='mini'>Channel2</Button>*/}
                 </div>
                 <div>
                     <Button onClick={this.changeRoom} value="room2" >Room2</Button>
+                    {/*<Button size='mini'>Channel1</Button>
+                    <Button size='mini'>Channel2</Button>*/}
                 </div>
                 <div id="fieldmessage" className="Field-Message">
                     <Comment.Group minimal>
@@ -130,9 +146,9 @@ class Chat extends Component {
                 </div>
                 <Form className="Message-Form">
                     <Input
-                        onKeyUp={this.checksendmessage}
-                        className="Input-Message" icon={<Icon name='send' onClick={this.submit} inverted circular link />}
-                        placeholder='message' onChange={this.changemessage} value={this.state.message}
+                        onKeyUp={this.checkKeySendMessage}
+                        className="Input-Message" icon={<Icon name='send' onClick={this.sendMessage} inverted circular link />}
+                        placeholder='message' onChange={this.changeMessage} value={this.state.message}
                     />
                 </Form>
             </div>
