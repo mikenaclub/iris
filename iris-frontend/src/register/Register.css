@@ -1,0 +1,101 @@
+/*
+.Register{
+    margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+}
+.Group-Button{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    margin-top: 5vh;
+    height: 100px;
+}
+.Register-Form{
+    width: 100%;
+}
+
+.Title{
+    margin-bottom: 5vh;
+    display: flex;
+    align-items: center;
+}
+.Register-button {
+    width: 40%;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .Register{
+        width: 95vw;
+    }
+    .Login-button{
+        text-align: center;
+    }
+    .Register-button{
+        width: 100%;
+    }
+    .Group-Button{
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-around;
+        height: 125px;
+    }
+}*/
+.Group-Button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    margin-top: 5vh;
+    height: 100px;
+}
+
+.Register-Form {
+    width: 100%;
+}
+
+.Title {
+    margin-bottom: 5vh;
+    display: flex;
+    align-items: center;
+}
+
+.Register {
+    margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+}
+
+.Register-button {
+    width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+    .Group-Button {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-around;
+        height: 125px;
+    }
+
+    .GotoLogin-button {
+        text-align: center;
+    }
+
+    .Register {
+        width: 95vw;
+    }
+
+    .Register-button {
+        width: 100%;
+    }
+
+}

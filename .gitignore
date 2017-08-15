@@ -24,6 +24,24 @@ yarn-error.log*
 
 Frontend/node_modules/
 Frontend/build/
+Login/node_modules/
+eris-frontend/node_modules/
+eris-register/target/
+eris-frontend/build/
+eris-register/src/test/test.iml
+eris-register/src/main/main.iml
+eris-register/demo.iml
+eris-login/node_modules/
+eris-chat/node_modules/
+eris-register/classes/artifacts/demo_jar/demo.jar
+eris-register/src/main/java/META-INF/MANIFEST.MF
+iris-userauth/target/
+iris-userauth/iris-userAuth.iml
+iris-frontend/node_modules/
+iris-register/target/
+iris-register/demo.iml
+iris-chat/node_modules/
+
 .netlify
 public/_redirects
 iris-chat/node_modules/
