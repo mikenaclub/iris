@@ -1,16 +1,17 @@
-import React, {Component} from 'react'
-import {Redirect} from 'react-router-dom';
+import React from 'react'
 import {Menu, Icon, Dropdown} from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 import './Sidebar.css'
 import UserDetail from '../../share/UserDetail';
 
-
-class Sidebar extends Component {
+class Sidebar extends React.Component {
+    static propTypes = {
+        onUserLogout: PropTypes.func.isRequired
+    }
     constructor() {
         super();
         this.state = {
-            username: 'ERROR',
-            isAuthenticated: UserDetail.getInstance().isAuthenticated()
+            username: 'ERROR'
         }
     }
 
@@ -23,16 +24,11 @@ class Sidebar extends Component {
     handleItemClick = (e, {name}) => this.setState({activeItem: name});
     logout = () => {
         UserDetail.getInstance().removeFromStorage();
-        this.setState({isAuthenticated: false});
+        //this.setState({isAuthenticated: false});
+        this.props.onUserLogout();
     }
 
     render() {
-        if (!this.state.isAuthenticated) {
-            return (
-                <Redirect to="/"/>
-            )
-        }
-
         const {activeItem} = this.state
 
         return (

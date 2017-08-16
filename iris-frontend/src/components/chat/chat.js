@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Form, Comment, Icon, Input } from 'semantic-ui-react';
 import './chat.css';
 import io from 'socket.io-client'
-import UserDetail from '../share/UserDetail'
-import chatConnectionString from '../share/app-connection';
+import UserDetail from '../../share/UserDetail'
+import {chatConnectionString} from '../../share/app-connection';
 
-class Chat extends Component {
+class Chat extends React.Component {
     constructor() {
         super();
         this.state = {

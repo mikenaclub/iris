@@ -1,25 +1,25 @@
 /**
  * Created by neetc on 7/15/2017.
  */
-import React, {Component} from 'react';
+import React from 'react';
 import {Button, Form, Modal, Header} from 'semantic-ui-react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
-import './Login.css';
-import {loginConnectionString} from '../share/app-connection'
-import axios from 'axios';
-import UserDetail from '../share/UserDetail'
+import './LoginForm.css';
+import PropTypes from 'prop-types'
 
-
-class LoginFrom extends Component {
+class LoginFrom extends React.Component {
+    static propTypes = {
+        onLogin: PropTypes.func.isRequired,
+        error: PropTypes.bool.isRequired,
+        onDismissDialog: PropTypes.func.isRequired
+    }
     constructor() {
         super();
         this.state = {
             username: "",
             password: "",
-            show: false,
-            isAuthenticated: UserDetail.getInstance().isAuthenticated(),
-            showerror: false
+            show: false
         }
     }
 
@@ -43,29 +43,13 @@ class LoginFrom extends Component {
     }
 
     onLoginBtnClick = () => {
-        axios.post(loginConnectionString, {
-            username: this.state.username,
-            password: this.state.password
-        }).then((res) => {
-            UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
-            this.setState({isAuthenticated: true});
-        }).catch((error) => {
-            this.setState({showerror: true});
-        });
+        this.props.onLogin(this.state.username,this.state.password)
     }
-    clickShowError = (e) => {
-        this.setState({
-            showerror: false
-        })
+    onDismissDialog = (e) => {
+        this.props.onDismissDialog()
     }
 
     render() {
-
-        if (this.state.isAuthenticated) {
-            return (
-                <Redirect to="/"/>
-            )
-        }
 
         return (
             <div className="Login">
@@ -99,14 +83,14 @@ class LoginFrom extends Component {
                         </div>
 
                         <Modal
-                            open={this.state.showerror}
+                            open={this.props.error}
                         >
                             <Header content='Login Fail !!!'/>
                             <Modal.Content>
                                 <p>Please try again later.</p>
                             </Modal.Content>
                             <Modal.Actions>
-                                <Button color='green' inverted onClick={this.clickShowError}>Yes
+                                <Button color='green' inverted onClick={this.onDismissDialog}>Yes
                                 </Button>
                             </Modal.Actions>
                         </Modal>
