@@ -12,7 +12,7 @@ const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     : BrowserRouter;
 
 
-class AppDetail extends Component {
+class AppDetail extends React.Component {
     render() {
         let detail = null;
         if (UserDetail.getInstance().isAuthenticated()) {

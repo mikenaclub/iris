@@ -4,6 +4,7 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
+    "@types/react": "^16.0.2",
     "axios": "^0.16.2",
     "gh-pages": "^1.0.0",
     "history": "^4.6.3",
