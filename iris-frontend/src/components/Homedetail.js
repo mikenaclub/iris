@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
 import {Button} from 'semantic-ui-react';
 
-class homepage extends Component {
+class Homepage extends Component {
     constructor(...args) {
         super(...args);
         this.state = {show: false}
@@ -38,4 +38,4 @@ class homepage extends Component {
     }
 }
 
-export default homepage;
+export default Homepage;

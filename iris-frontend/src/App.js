@@ -1,16 +1,20 @@
-import React, {Component} from 'react';
-import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
-import './App.css';
-import Homepage from './homepage/Homepage';
-import LoginFrom from './login/Login';
-import RegisterForm from './register/Register';
-import Header from './layout/header/Header';
-import MainPage from './main/MainPage';
-import UserDetail from './share/UserDetail';
+import React, {Component} from 'react'
+import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom'
+import './App.css'
+import Homepage from './homepage/Homepage'
+import LoginFrom from './components/login/LoginFrom'
+import RegisterForm from './register/Register'
+import Header from './layout/header/Header'
+import MainPage from './main/MainPage'
+import UserDetail from './share/UserDetail'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+
 const AppRouter = window.matchMedia('(display-mode: standalone)').matches
     ? HashRouter
     : BrowserRouter;
-
+const store = createStore(reducer)
 
 class AppDetail extends Component {
     render() {
@@ -38,14 +42,9 @@ class AppDetail extends Component {
 }
 
 class App extends Component {
-    constructor(...args) {
-        super(...args);
-        this.state = {show: false}
-    }
-
-
     render() {
         return (
+            <Provider store={store}>
             <div>
                 <AppRouter>
                     <div className="App">
@@ -54,6 +53,7 @@ class App extends Component {
                     </div>
                 </AppRouter>
             </div>
+            </Provider>
         );
     }
 }

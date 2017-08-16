@@ -5,10 +5,10 @@ import React, {Component} from 'react';
 import {Button, Form, Modal, Header} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
-import './Login.css';
-import {loginConnectionString} from '../share/app-connection'
+import './LoginFrom.css';
+import {loginConnectionString} from '../../share/app-connection'
 import axios from 'axios';
-import UserDetail from '../share/UserDetail'
+import UserDetail from '../../share/UserDetail'
 
 
 class LoginFrom extends Component {

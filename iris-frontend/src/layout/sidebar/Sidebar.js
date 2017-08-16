@@ -4,7 +4,6 @@ import {Menu, Icon, Dropdown} from 'semantic-ui-react'
 import './Sidebar.css'
 import UserDetail from '../../share/UserDetail';
 
-
 class Sidebar extends Component {
     constructor() {
         super();
