@@ -1,0 +1,21 @@
+.App-header-full {
+    width: 100%;
+    background-color: #222;
+    height: 200px;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.App-header-full-enter {
+    height: 50px !important;
+    transition: height 500ms;
+}
+
+.App-header-full-enter.App-header-full-enter-active {
+    height: 200px !important;
+}
