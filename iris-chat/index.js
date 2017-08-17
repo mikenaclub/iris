@@ -26,11 +26,13 @@ io.on('connection', function(socket){
             room = changeroom;
 
             //alet user join to client side
-            let alertmsg = '{"user":"From Server","room":"'+changeroom+'","message":"'+useridentidy+" connected in room : "+changeroom+'"}'
+            let alertmsg = '{"user":"From Server","room":"'+changeroom+'","message":"'+useridentidy+" connected in room : "+changeroom+
+                '","date":"'+new Date()+
+                '"}'
             let jsonalertmsg = JSON.parse(alertmsg)
-            db.Chat.find({room:room}).sort({_id: -1,date:-1}).limit(5, function(err, docs) {
+            db.Chat.find({room:room}).sort({_id: 1,date:1}).limit(10, function(err, docs) {
                 let jsonoldmessage = docs;
-                io.in(room).emit('alert changeroom', jsonalertmsg,jsonoldmessage);
+                io.in(room).emit(useridentidy+'alert changeroom', jsonalertmsg,jsonoldmessage);
             });
         }
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, Comment, Icon, Input } from 'semantic-ui-react';
+import {Button, Form, Comment, Icon, Input} from 'semantic-ui-react';
 import './chat.css';
 import io from 'socket.io-client'
 import UserDetail from '../share/UserDetail'
@@ -8,7 +8,7 @@ class Chat extends Component {
     constructor() {
         super();
         this.state = {
-            socket : io(`http://localhost:8093`),
+            socket: io(`http://localhost:8093`),
             show: false,
             message: "",
             messages: [],
@@ -21,10 +21,11 @@ class Chat extends Component {
     //after render()
     componentDidMount() {
         console.log(this.state.username)
-        this.state.socket.emit('userconnect' , this.state.username)
+        this.state.socket.emit('userconnect', this.state.username)
         this.setState({show: true})
+
         //When receive message from server
-        this.state.socket.on('chat message', function(msg){
+        this.state.socket.on('chat message', function (msg) {
             var allmessages = this.state.messages;
             this.setState((previousState) => ({
                 messages: allmessages.concat(msg),
@@ -37,17 +38,16 @@ class Chat extends Component {
         }.bind(this))
 
         //alert message in message filed when user join room
-        this.state.socket.on('alert changeroom',function (msg,msg2) {
-            console.log(msg2)
+        this.state.socket.on(this.state.username + 'alert changeroom', function (msgJoinRoom, msgOld) {
             this.setState({
-                messages : [],
-                room: msg.room
+                messages: [],
+                room: msgJoinRoom.room
             })
 
             //collect old message
-            var allmessages = this.state.messages;
+            var allMessages = this.state.messages;
             this.setState({
-                messages: allmessages.concat(msg,msg2),
+                messages: allMessages.concat(msgOld, msgJoinRoom),
             });
 
             //scroll down show new message in Field message
@@ -64,17 +64,17 @@ class Chat extends Component {
 
 
     sendMessage = () => {
-        if (this.state.message !=="" && this.state.room !== ""){
+        if (this.state.message !== "" && this.state.room !== "") {
             //send message to server
-            var message = '{"user":"'+this.state.username+'","message":"'+this.state.message+'"}';
+            var message = '{"user":"' + this.state.username + '","message":"' + this.state.message + '"}';
             var jsonmessage = JSON.parse(message);
             this.state.socket.emit('chat message', jsonmessage);
             this.setState({
-                message:""
+                message: ""
             })
         }
         this.setState({
-            message:""
+            message: ""
         })
 
     }
@@ -86,7 +86,7 @@ class Chat extends Component {
     }
 
     checkKeySendMessage = (e) => {
-        if(e.key === "Enter"){
+        if (e.key === "Enter") {
             this.sendMessage();
         }
     }
@@ -96,46 +96,79 @@ class Chat extends Component {
         /*this.setState({
             messages : []
         })*/
-        this.state.socket.emit("changeroom",e.target.value)
+        this.state.socket.emit("changeroom", e.target.value)
     }
 
-    render(){
+    convertDateTime = (date) => {
+        let test = new Date(date)
+        let currentdate = new Date();
+        if (test.getDay() === currentdate.getDay()) {
+            return "Today " + test.getHours() + ":" + test.getMinutes()
+        }
+        else {
+            return test.getDate() + '-' + (test.getMonth() + 1) + '-' + test.getFullYear() + " " + test.getHours() + ":" + test.getMinutes();
+        }
+    }
+
+    render() {
         var messages = this.state.messages;
         var messagesDiv = [];
         var position = "";
         var avatar = "";
+        var text = "";
         //show message on field message
         for (var i = 0; i < messages.length; i++) {
             //if my message
-            if (messages[i].user === this.state.username){
+            if (messages[i].user === this.state.username) {
                 position = "Mymessage";
                 avatar = "";
             }
             //if other message
             else {
                 position = "";
-                avatar = <Comment.Avatar as='a' src='https://react.semantic-ui.com/assets/images/avatar/small/matt.jpg' />
+                avatar =
+                    <Comment.Avatar as='a' src='https://react.semantic-ui.com/assets/images/avatar/small/matt.jpg'/>
             }
 
-            messagesDiv.push(
-                <Comment key={i}>
-                    {avatar}
-                    <Comment.Content>
-                        <Comment.Author  as='a' className={position}>{messages[i].user}</Comment.Author>
-                        <Comment.Text className={position}>{messages[i].message.replace(/ /g, "\u00a0")}</Comment.Text>
-                    </Comment.Content>
-                </Comment>
-            );
+            let test = this.convertDateTime(messages[i].date);
+
+            if ((i + 1) < messages.length && ((new Date(messages[i + 1].date).getTime() - new Date(messages[i].date).getTime()) < 180000
+                    && messages[i + 1].user === messages[i].user)) {
+                text += (messages[i].message + "\n" )
+            }
+            else {
+                text += (messages[i].message + "\n" )
+                console.log(text);
+                messagesDiv.push(
+                    <Comment key={i} className={position}>
+                        {avatar}
+                        <Comment.Content>
+                            <Comment.Author as='a'>{messages[i].user}</Comment.Author>
+                            <Comment.Metadata>
+                                <div>{test}</div>
+                            </Comment.Metadata>
+                                {text.split("\n").map((item,key) => {
+                                    return (<Comment.Text key={key} className={position}>{item}</Comment.Text>)
+                                    }
+                                )}
+                        </Comment.Content>
+
+                    </Comment>
+
+                );
+                text = "";
+            }
+
         }
         return (
             <div className="Chat">
                 <div>
-                    <Button onClick={this.changeRoom} value="room1" >Room1</Button>
+                    <Button onClick={this.changeRoom} value="room1">Room1</Button>
                     {/*<Button size='mini'>Channel1</Button>
                     <Button size='mini'>Channel2</Button>*/}
                 </div>
                 <div>
-                    <Button onClick={this.changeRoom} value="room2" >Room2</Button>
+                    <Button onClick={this.changeRoom} value="room2">Room2</Button>
                     {/*<Button size='mini'>Channel1</Button>
                     <Button size='mini'>Channel2</Button>*/}
                 </div>
@@ -147,7 +180,8 @@ class Chat extends Component {
                 <Form className="Message-Form">
                     <Input
                         onKeyUp={this.checkKeySendMessage}
-                        className="Input-Message" icon={<Icon name='send' onClick={this.sendMessage} inverted circular link />}
+                        className="Input-Message"
+                        icon={<Icon name='send' onClick={this.sendMessage} inverted circular link/>}
                         placeholder='message' onChange={this.changeMessage} value={this.state.message}
                     />
                 </Form>
