@@ -6,9 +6,6 @@ import {Button, Form, Modal, Header} from 'semantic-ui-react';
 import {Link, Redirect} from 'react-router-dom';
 import {CSSTransition} from 'react-transition-group';
 import './LoginFrom.css';
-import {loginConnectionString} from '../../share/app-connection'
-import axios from 'axios';
-import UserDetail from '../../share/UserDetail'
 
 
 class LoginFrom extends Component {
@@ -18,7 +15,6 @@ class LoginFrom extends Component {
             username: "",
             password: "",
             show: false,
-            isAuthenticated: UserDetail.getInstance().isAuthenticated(),
             showerror: false
         }
     }
@@ -43,15 +39,7 @@ class LoginFrom extends Component {
     }
 
     onLoginBtnClick = () => {
-        axios.post(loginConnectionString, {
-            username: this.state.username,
-            password: this.state.password
-        }).then((res) => {
-            UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
-            this.setState({isAuthenticated: true});
-        }).catch((error) => {
-            this.setState({showerror: true});
-        });
+
     }
     clickShowError = (e) => {
         this.setState({

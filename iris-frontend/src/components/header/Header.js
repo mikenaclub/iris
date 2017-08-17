@@ -1,24 +1,18 @@
-import React, {Component} from 'react';
-import {Switch, Route} from 'react-router-dom';
+import React from 'react';
 import FullHeader from './Header-full';
 import SmallHeader from './Header-small';
-import UserDetail from '../../share/UserDetail'
-
-class Header extends Component {
+import PropTypes from 'prop-types'
+class Header extends React.Component {
+    static propTypes = {
+        size: PropTypes.string
+    }
     render() {
-        if (UserDetail.getInstance().isAuthenticated()) {
-            return (
-                <div></div>
-            )
+        if(this.props.size === 'big'){
+            return <FullHeader/>
         }
-
-        return (
-            <Switch>
-                <Route exact path="/" component={FullHeader}/>
-                <Route exact path="/login" component={SmallHeader}/>
-                <Route exact path="/register" component={SmallHeader}/>
-            </Switch>
-        )
+        else{
+            return <SmallHeader/>
+        }
     }
 }
 

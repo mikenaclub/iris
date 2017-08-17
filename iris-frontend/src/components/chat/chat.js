@@ -20,7 +20,6 @@ class Chat extends React.Component {
 
     //after render()
     componentDidMount() {
-        console.log(this.state.username)
         this.state.socket.emit('userconnect' , this.state.username)
         this.setState({show: true})
         //When receive message from server
