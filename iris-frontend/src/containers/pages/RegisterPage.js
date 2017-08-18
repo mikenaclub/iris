@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import Header from '../../components/header/Header'
 import RegisterForm from '../../components/register/RegisterForm'
 import {userLogin} from '../../actions/userAuthention'
 import axios from 'axios'
@@ -36,12 +35,13 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                <Header size="small"/>
+                <div className="App-detail">
                 <RegisterForm
                     onRegistering={this.onRegistering}
                     isError={this.state.isError}
                     onDismissDialog={this.onDismissDialog}
                 />
+                </div>
             </div>
         )
     }

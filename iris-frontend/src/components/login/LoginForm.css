@@ -17,13 +17,8 @@
     align-items: center;
 }
 
-.Login {
-    margin: auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50vw;
+.Login{
+    width: 100%;
 }
 
 .Login-button {
@@ -43,7 +38,7 @@
     }
 
     .Login {
-        width: 95vw;
+        width: 100%;
     }
 
     .Login-button {

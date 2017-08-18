@@ -1,23 +1,7 @@
 .Sidebar {
     max-width: 300px;
-    background-color: black;
     min-height: 100vh;
-    height: 100%;
+    height: 100vh;
     flex: 1;
-}
-
-.Sidebar .UserInfo {
-    color: white;
-    background-color: #0d71bb;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px;
-}
-
-.RoomList{
-    margin-top: 16px;
-    margin-right: 10px;
+    background-color: #0f0f10;
 }

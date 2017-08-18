@@ -2,6 +2,7 @@ import React from 'react';
 import FullHeader from './Header-full';
 import SmallHeader from './Header-small';
 import PropTypes from 'prop-types'
+
 class Header extends React.Component {
     static propTypes = {
         size: PropTypes.string

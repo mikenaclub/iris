@@ -1,24 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import Header from '../../components/header/Header'
 import LoginFrom from '../../components/login/LoginForm'
 import {userLogin} from '../../actions/userAuthention'
 import {loginConnectionString} from '../../share/app-connection'
 import axios from 'axios'
 import UserDetail from '../../share/UserDetail'
+import LoginSection from '../../components/pages/login/LoginSection'
 
 class LoginPage extends React.Component {
     static propTypes = {
         onUserSuccessLogin: PropTypes.func.isRequired
     }
-    constructor(){
+
+    constructor() {
         super()
         this.state = {
-            isError: false
+            isError: false,
+            errorStatus: 0
         }
     }
-    onLoggingIn = (username,password) => {
+
+    onLoggingIn = (username, password) => {
         axios.post(loginConnectionString, {
             username: username,
             password: password
@@ -26,31 +29,35 @@ class LoginPage extends React.Component {
             UserDetail.getInstance().setUserInfo({username: username}).setToLocalStorage();
             this.props.onUserSuccessLogin(username)
         }).catch((error) => {
-            this.setState({isError: true})
+            this.setState({isError: true, errorStatus: error.response.status})
         });
     }
     onDismissDialog = () => {
         this.setState({isError: false})
     }
+
     render() {
         return (
             <div>
-                <Header size="small"/>
-                <LoginFrom
-                    onLoggingIn={this.onLoggingIn}
-                    onDismissDialog={this.onDismissDialog}
-                    error={this.state.isError}
-                />
+                <LoginSection>
+                    <LoginFrom
+                        onLoggingIn={this.onLoggingIn}
+                        onDismissDialog={this.onDismissDialog}
+                        error={this.state.isError}
+                        errorStatus={this.state.errorStatus}
+                    />
+                </LoginSection>
             </div>
         )
     }
 }
+
 const mapStateToProps = (state) => {
     return {};
 }
 const mapDispatchToProps = (dispatch) => ({
-    onUserSuccessLogin(username){
+    onUserSuccessLogin(username) {
         dispatch(userLogin(username))
     }
 })
-export default connect(mapStateToProps,mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

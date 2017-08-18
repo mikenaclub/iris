@@ -38,7 +38,7 @@ class FullHeader extends Component {
                 >
                     <div className="App-header-full">
                         <img src={logo} className="App-logo" alt="logo"/>
-                        <h2> {AppSetting.AppName} - {AppSetting.AppVersion} </h2>
+                        <h2 className="App-header-full-text"> {AppSetting.AppName} - {AppSetting.AppVersion} </h2>
                         <div>
                             Currently language&nbsp;&nbsp;
                             <Button.Group size="small" color='blue'>

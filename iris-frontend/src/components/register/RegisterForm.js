@@ -82,7 +82,7 @@ class RegisterForm extends React.Component {
 
     clickShowError = (e) => {
         this.props.onDismissDialog();
-        this.setState({loading: false})
+        this.setState({showerror: false,loading: false})
     }
 
     render() {

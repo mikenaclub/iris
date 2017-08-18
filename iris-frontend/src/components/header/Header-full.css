@@ -1,6 +1,6 @@
 .App-header-full {
     width: 100%;
-    background-color: #222;
+    background-color: #222222;
     height: 200px;
     color: white;
     padding: 20px;
@@ -10,7 +10,9 @@
     justify-content: center;
     text-align: center;
 }
-
+.App-header-full-text{
+    color: white;
+}
 .App-header-full-enter {
     height: 50px !important;
     transition: height 500ms;
