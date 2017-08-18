@@ -6,14 +6,13 @@ import {Button, Form, Modal, Header} from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
 import './RegisterForm.css'
 import {CSSTransition} from 'react-transition-group';
-import axios from 'axios'
-import {registerConnetionString} from '../../share/app-connection'
-import UserDetail from '../../share/UserDetail'
 import PropTypes from 'prop-types'
 
 class RegisterForm extends React.Component {
     static propTypes = {
-        onUserSuccessRegister: PropTypes.func.isRequired
+        onRegistering: PropTypes.func.isRequired,
+        isError: PropTypes.bool.isRequired,
+        onDismissDialog: PropTypes.func.isRequired
     }
     constructor() {
         super();
@@ -76,24 +75,14 @@ class RegisterForm extends React.Component {
             })
         }
         else {
-            axios.post(registerConnetionString, {
-                username: this.state.username,
-                password: this.state.password
-            }).then((response) => {
-                console.log(response)
-                UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
-                this.props.onUserSuccessRegister()
-            }).catch((error) => {
-                this.setState({loading: false,showerror: true,errormessage: error.response.data})
-            })
+            this.props.onRegistering(this.state.username,this.state.password)
         }
 
     }
 
     clickShowError = (e) => {
-        this.setState({
-            showerror: false
-        })
+        this.props.onDismissDialog();
+        this.setState({loading: false})
     }
 
     render() {
@@ -134,7 +123,7 @@ class RegisterForm extends React.Component {
                         </div>
 
                         <Modal
-                            open={this.state.showerror}
+                            open={this.state.showerror || this.props.isError}
                         >
                             <Header content='Register Fail !!!'/>
                             <Modal.Content>

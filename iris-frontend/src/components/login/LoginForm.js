@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 
 class LoginFrom extends React.Component {
     static propTypes = {
-        onLogin: PropTypes.func.isRequired,
+        onLoggingIn: PropTypes.func.isRequired,
         error: PropTypes.bool.isRequired,
         onDismissDialog: PropTypes.func.isRequired
     }
@@ -43,7 +43,7 @@ class LoginFrom extends React.Component {
     }
 
     onLoginBtnClick = () => {
-        this.props.onLogin(this.state.username,this.state.password)
+        this.props.onLoggingIn(this.state.username,this.state.password)
     }
     onDismissDialog = (e) => {
         this.props.onDismissDialog()

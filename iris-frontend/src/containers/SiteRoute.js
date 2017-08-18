@@ -16,8 +16,9 @@ class SiteRoute extends React.Component {
     }
 
     componentWillMount() {
-        if(UserDetail.getInstance().isAuthenticated()){
-            this.props.onUserLogined()
+        let user = UserDetail.getInstance()
+        if(user.isAuthenticated()){
+            this.props.onUserLogined(user.username)
         }
     }
 
@@ -44,8 +45,8 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.userAuthention.isAuthenticated
 }}
 const mapDispatchToProps = (dispatch) => ({
-    onUserLogined(){
-        dispatch(userLogin())
+    onUserLogined(username){
+        dispatch(userLogin(username))
     }
 })
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SiteRoute))

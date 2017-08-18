@@ -18,14 +18,13 @@ class LoginPage extends React.Component {
             isError: false
         }
     }
-    onLogin = (username,password) => {
+    onLoggingIn = (username,password) => {
         axios.post(loginConnectionString, {
             username: username,
             password: password
         }).then((res) => {
-            console.log('logined')
             UserDetail.getInstance().setUserInfo({username: username}).setToLocalStorage();
-            this.props.onUserSuccessLogin()
+            this.props.onUserSuccessLogin(username)
         }).catch((error) => {
             this.setState({isError: true})
         });
@@ -38,7 +37,7 @@ class LoginPage extends React.Component {
             <div>
                 <Header size="small"/>
                 <LoginFrom
-                    onLogin={this.onLogin}
+                    onLoggingIn={this.onLoggingIn}
                     onDismissDialog={this.onDismissDialog}
                     error={this.state.isError}
                 />
@@ -50,8 +49,8 @@ const mapStateToProps = (state) => {
     return {};
 }
 const mapDispatchToProps = (dispatch) => ({
-    onUserSuccessLogin(){
-        dispatch(userLogin())
+    onUserSuccessLogin(username){
+        dispatch(userLogin(username))
     }
 })
 export default connect(mapStateToProps,mapDispatchToProps)(LoginPage);
