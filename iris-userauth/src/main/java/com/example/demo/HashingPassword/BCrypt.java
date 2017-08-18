@@ -12,7 +12,7 @@ public class BCrypt {
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public String encode(String password) {
-        System.out.println("Encode !!!");
+        System.out.println(password);
         password = passwordEncoder.encode(password);
         return password;
     }

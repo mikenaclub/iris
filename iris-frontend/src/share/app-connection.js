@@ -1,4 +1,4 @@
-const _registerConnectionString = "http://localhost:8091/v1/user";
-const _loginConnectionString = "http://localhost:8091/v1/login";
-exports.registerConnetionString = _registerConnectionString;
-exports.loginConnectionString = _loginConnectionString;
+
+exports.registerConnetionString = "http://localhost:8091/v1/user";
+exports.loginConnectionString = "http://localhost:8091/v1/login";
+exports.chatConnectionString = "http://localhost:8093/";

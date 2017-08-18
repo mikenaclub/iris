@@ -34,7 +34,7 @@ public class UserController {
         Gson gson = new Gson();
         UserModel user = gson.fromJson(userInfo, UserModel.class);
         boolean result = userRepository.register(user);
-        System.out.println(result);
+        
         if (result)
             return ResponseEntity.status(HttpStatus.CREATED).body(null);
         else

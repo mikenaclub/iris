@@ -1,16 +1,19 @@
 /**
  * Created by STR02119 on 7/17/2017.
  */
-import React, {Component} from 'react';
+import React from 'react';
 import {Button, Form, Modal, Header} from 'semantic-ui-react'
-import {Link, Redirect} from 'react-router-dom';
-import './Register.css'
-import {registerConnetionString} from '../share/app-connection';
+import {Link} from 'react-router-dom';
+import './RegisterForm.css'
 import {CSSTransition} from 'react-transition-group';
-import UserDetail from "../share/UserDetail";
-import axios from 'axios';
+import PropTypes from 'prop-types'
 
-class RegisterForm extends Component {
+class RegisterForm extends React.Component {
+    static propTypes = {
+        onRegistering: PropTypes.func.isRequired,
+        isError: PropTypes.bool.isRequired,
+        onDismissDialog: PropTypes.func.isRequired
+    }
     constructor() {
         super();
         this.state = {
@@ -19,7 +22,6 @@ class RegisterForm extends Component {
             password: "",
             reEnterPassword: "",
             show: false,
-            isAuthenticated: UserDetail.getInstance().isAuthenticated(),
             showerror: false,
             errormessage: ""
         };
@@ -54,7 +56,6 @@ class RegisterForm extends Component {
             loading: true
         });
         if (this.state.username === "" || this.state.password === "" || this.state.reEnterPassword === "") {
-            console.log("Please use full field")
             this.setState({
                 showerror: true,
                 errormessage: "Please use full field"
@@ -74,39 +75,17 @@ class RegisterForm extends Component {
             })
         }
         else {
-            axios.post(registerConnetionString, {
-                username: this.state.username,
-                password: this.state.password
-            }).then((response) => {
-                UserDetail.getInstance().setUserInfo({username: this.state.username}).setToLocalStorage();
-                this.setState({
-                    loading: false,
-                    isAuthenticated: true
-                })
-            }).catch((error) => {
-                console.log(error);
-                this.setState({
-                    loading: false,
-                    showerror: true,
-                    errormessage: error.response
-                });
-            });
+            this.props.onRegistering(this.state.username,this.state.password)
         }
 
     }
 
     clickShowError = (e) => {
-        this.setState({
-            showerror: false
-        })
+        this.props.onDismissDialog();
+        this.setState({loading: false})
     }
 
     render() {
-        if (this.state.isAuthenticated) {
-            return (
-                <Redirect to="/"/>
-            )
-        }
 
         return (
             <div className="Register">
@@ -144,7 +123,7 @@ class RegisterForm extends Component {
                         </div>
 
                         <Modal
-                            open={this.state.showerror}
+                            open={this.state.showerror || this.props.isError}
                         >
                             <Header content='Register Fail !!!'/>
                             <Modal.Content>
