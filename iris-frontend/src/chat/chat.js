@@ -54,6 +54,10 @@ class Chat extends Component {
             var objDiv = document.getElementById("fieldmessage");
             objDiv.scrollTop = objDiv.scrollHeight;
         }.bind(this))
+
+        this.state.socket.on('useronline', function (userinroom) {
+            console.log("useronline : "+JSON.stringify(userinroom.useronline));
+        }.bind(this))
     }
 
     componentWillUnmount() {
@@ -100,13 +104,13 @@ class Chat extends Component {
     }
 
     convertDateTime = (date) => {
-        let test = new Date(date)
+        let formatdate = new Date(date)
         let currentdate = new Date();
-        if (test.getDay() === currentdate.getDay()) {
-            return "Today " + test.getHours() + ":" + test.getMinutes()
+        if (formatdate.getDay() === currentdate.getDay()) {
+            return "Today " + formatdate.getHours() + ":" + formatdate.getMinutes()
         }
         else {
-            return test.getDate() + '-' + (test.getMonth() + 1) + '-' + test.getFullYear() + " " + test.getHours() + ":" + test.getMinutes();
+            return formatdate.getDate() + '-' + (formatdate.getMonth() + 1) + '-' + formatdate.getFullYear() + " " + formatdate.getHours() + ":" + formatdate.getMinutes();
         }
     }
 
@@ -130,7 +134,7 @@ class Chat extends Component {
                     <Comment.Avatar as='a' src='https://react.semantic-ui.com/assets/images/avatar/small/matt.jpg'/>
             }
 
-            let test = this.convertDateTime(messages[i].date);
+            let date = this.convertDateTime(messages[i].date);
 
             if ((i + 1) < messages.length && ((new Date(messages[i + 1].date).getTime() - new Date(messages[i].date).getTime()) < 180000
                     && messages[i + 1].user === messages[i].user)) {
@@ -138,14 +142,13 @@ class Chat extends Component {
             }
             else {
                 text += (messages[i].message + "\n" )
-                console.log(text);
                 messagesDiv.push(
                     <Comment key={i} className={position}>
                         {avatar}
                         <Comment.Content>
                             <Comment.Author as='a'>{messages[i].user}</Comment.Author>
                             <Comment.Metadata>
-                                <div>{test}</div>
+                                <div>{date}</div>
                             </Comment.Metadata>
                                 {text.split("\n").map((item,key) => {
                                     return (<Comment.Text key={key} className={position}>{item}</Comment.Text>)
