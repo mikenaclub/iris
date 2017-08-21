@@ -29,6 +29,7 @@ class LoginPage extends React.Component {
             UserDetail.getInstance().setUserInfo({username: username}).setToLocalStorage();
             this.props.onUserSuccessLogin(username)
         }).catch((error) => {
+            console.log(error.response)
             this.setState({isError: true, errorStatus: error.response.status})
         });
     }

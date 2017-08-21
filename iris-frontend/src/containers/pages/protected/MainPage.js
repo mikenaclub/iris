@@ -11,7 +11,7 @@ class MainPage extends React.Component {
     static propTypes = {
         onUserLogout: PropTypes.func.isRequired
     }
-    static mainMode = {
+    mainMode = {
         textChat: 'TEXTCHAT',
         Whiteboard: 'WHITEBOARD'
     }
@@ -37,7 +37,7 @@ class MainPage extends React.Component {
 
     render() {
         let main = "loading"
-        if (this.state.textChat === this.mainMode.textChat) {
+        if (this.state.mainMode === this.mainMode.textChat) {
             main = <ChatModule/>
         }
         else {
@@ -46,11 +46,12 @@ class MainPage extends React.Component {
         return (
             <div>
                 <MainSection>
-                <Sidebar
-                    username={this.props.username}
-                    onUserLogout={this.onUserLogout}/>
-                <button onClick={this.onSwapModeBtnClick}>swap mode</button>
-                {main}
+                    <Sidebar
+                        username={this.props.username}
+                        onUserLogout={this.onUserLogout}/>
+                    <button onClick={this.onSwapModeBtnClick}>swap mode</button>
+                    {main}
+                </MainSection>
             </div>
         )
     }
