@@ -14,7 +14,8 @@ class Chat extends React.Component {
             message: "",
             messages: [],
             username: UserDetail.getInstance().username,
-            room: ""
+            room: "",
+            channel:""
         }
 
     }
@@ -98,9 +99,6 @@ class Chat extends React.Component {
 
     changeRoom = (e) => {
         console.log(e.target.value)
-        /*this.setState({
-            messages : []
-        })*/
         this.state.socket.emit("changeroom", e.target.value)
     }
 
@@ -166,14 +164,13 @@ class Chat extends React.Component {
         return (
             <div className="Chat">
                 <div>
-                    <Button onClick={this.changeRoom} value="room1">Room1</Button>
-                    {/*<Button size='mini'>Channel1</Button>
-                    <Button size='mini'>Channel2</Button>*/}
+                    <Button value="room1">Room1</Button>
+                    <Button size='mini' value="room1ch1" onClick={this.changeRoom}>Channel1</Button>
                 </div>
                 <div>
-                    <Button onClick={this.changeRoom} value="room2">Room2</Button>
-                    {/*<Button size='mini'>Channel1</Button>
-                    <Button size='mini'>Channel2</Button>*/}
+                    <Button value="room2">Room2</Button>
+                    <Button size='mini' value="room2ch1" onClick={this.changeRoom}>Channel1</Button>
+                    <Button size='mini' value="room2ch2" onClick={this.changeRoom}>Channel2</Button>
                 </div>
                 <div id="fieldmessage" className="Field-Message">
                     <Comment.Group minimal>
