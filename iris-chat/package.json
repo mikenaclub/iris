@@ -1,7 +1,7 @@
 {
-  "name": "socketserv2",
+  "name": "ServChat",
   "version": "1.0.0",
-  "description": "serv2",
+  "description": "ServChat",
   "main": "index.js",
   "scripts": {
     "start": "node index",
@@ -11,6 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2",
+    "mongojs": "^2.4.1",
     "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.36"
   }
 }
