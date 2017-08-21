@@ -8,33 +8,41 @@ import RegisterPage from "./pages/RegisterPage"
 import MainPage from './pages/protected/MainPage'
 import UserDetail from '../share/UserDetail'
 import {userLogin} from "../actions/userAuthention"
+import Header from '../components/header/Header'
 
 class SiteRoute extends React.Component {
-    static propTypes ={
+    static propTypes = {
         isAuthenticated: PropTypes.bool.isRequired,
         onUserLogined: PropTypes.func.isRequired
     }
 
     componentWillMount() {
         let user = UserDetail.getInstance()
-        if(user.isAuthenticated()){
+        if (user.isAuthenticated()) {
             this.props.onUserLogined(user.username)
         }
     }
 
-    render(){
-        if(this.props.isAuthenticated){
-            return(
+    render() {
+        if (this.props.isAuthenticated) {
+            return (
                 <MainPage/>
             )
         }
-        else{
-            return(
-                <Switch>
-                    <Route exact path="/" component={Homepage}/>
-                    <Route exact path="/login" component={LoginPage}/>
-                    <Route exact path="/register" component={RegisterPage}/>
-                </Switch>
+        else {
+            return (
+                <div>
+                    <Switch>
+                        <Route exact path="/" render={() => <Header size="big"/>}/>
+                        <Route exact path="/login" render={() => <Header/>}/>
+                        <Route exact path="/register" render={() => <Header/>}/>
+                    </Switch>
+                    <Switch>
+                        <Route exact path="/" component={Homepage}/>
+                        <Route exact path="/login" component={LoginPage}/>
+                        <Route exact path="/register" component={RegisterPage}/>
+                    </Switch>
+                </div>
             )
         }
     }
@@ -42,11 +50,12 @@ class SiteRoute extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-    isAuthenticated: state.userAuthention.isAuthenticated
-}}
+        isAuthenticated: state.userAuthention.isAuthenticated
+    }
+}
 const mapDispatchToProps = (dispatch) => ({
-    onUserLogined(username){
+    onUserLogined(username) {
         dispatch(userLogin(username))
     }
 })
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(SiteRoute))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SiteRoute))

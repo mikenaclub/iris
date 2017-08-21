@@ -50,7 +50,7 @@ public class UserController {
         if (result)
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
         else
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login fail!! Please check username and password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("username or password are incorrect");
     }
 
 }

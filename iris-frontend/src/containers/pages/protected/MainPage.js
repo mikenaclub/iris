@@ -5,6 +5,7 @@ import Sidebar from '../../../components/sidebar/Sidebar'
 import ChatModule from './ChatModule'
 import WhiteboardModule from './WhiteboardModule'
 import {userLogout} from "../../../actions/userAuthention";
+import MainSection from '../../../components/pages/main/MainSection'
 
 class MainPage extends React.Component {
     static propTypes = {
@@ -44,7 +45,9 @@ class MainPage extends React.Component {
         }
         return (
             <div>
+                <MainSection>
                 <Sidebar
+                    username={this.props.username}
                     onUserLogout={this.onUserLogout}/>
                 <button onClick={this.onSwapModeBtnClick}>swap mode</button>
                 {main}
@@ -54,7 +57,9 @@ class MainPage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        username: state.userAuthention.username
+    }
 }
 const mapDispatchToProps = (dispatch) => ({
     onUserLogout() {
