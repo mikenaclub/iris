@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Comment, Icon, Input } from 'semantic-ui-react';
+import {Form, Comment, Icon, Input, Button} from 'semantic-ui-react';
 import './chat.css';
 import io from 'socket.io-client'
 import UserDetail from '../../share/UserDetail'
@@ -9,7 +9,7 @@ class Chat extends React.Component {
     constructor() {
         super();
         this.state = {
-            socket : io(chatConnectionString),
+            socket: io(chatConnectionString),
             show: false,
             message: "",
             messages: [],
@@ -57,8 +57,8 @@ class Chat extends React.Component {
         }.bind(this))
 
         this.state.socket.on('useronline', function (userinroom) {
-            console.log("useronline : "+JSON.stringify(userinroom.useronline));
-        }.bind(this))
+            console.log("useronline : " + JSON.stringify(userinroom.useronline));
+        })
     }
 
     componentWillUnmount() {
@@ -151,14 +151,13 @@ class Chat extends React.Component {
                             <Comment.Metadata>
                                 <div>{date}</div>
                             </Comment.Metadata>
-                                {text.split("\n").map((item,key) => {
+                            {text.split("\n").map((item, key) => {
                                     return (<Comment.Text key={key} className={position}>{item}</Comment.Text>)
-                                    }
-                                )}
+                                }
+                            )}
                         </Comment.Content>
 
                     </Comment>
-
                 );
                 text = "";
             }
